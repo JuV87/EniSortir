@@ -20,7 +20,6 @@ class TripType extends AbstractType
             ->add('descriptioninfos')
             ->add('statustrip')
             ->add('urlpicture')
-            ->add('organizer')
         ;
     }
 

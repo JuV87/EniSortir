@@ -57,11 +57,6 @@ class Trip
      */
     private $urlpicture;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $organizer;
-
     public function getId(): ?int
     {
         return $this->id;
