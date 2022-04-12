@@ -7,7 +7,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-use http\Env\Response;
 
 /**
  * @method Trip|null find($id, $lockMode = null, $lockVersion = null)
@@ -33,16 +32,7 @@ class TripRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-/*
-    public function tripList():array{
-        $queryBuilder=$this->createQueryBuilder('allTrip');
-        $queryBuilder
-            ->andWhere('')
-            ->leftJoin('fc.famille', 'f', 'WITH', 'fc.actif = 1')
 
-        return
-    }
-*/
     /**
      * @throws ORMException
      * @throws OptimisticLockException
@@ -54,9 +44,6 @@ class TripRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
-
-
 
     // /**
     //  * @return Trip[] Returns an array of Trip objects
