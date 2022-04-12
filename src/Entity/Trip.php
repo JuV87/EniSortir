@@ -57,6 +57,18 @@ class Trip
      */
     private $urlpicture;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $etat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $location;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +166,30 @@ class Trip
     public function setUrlpicture(string $urlpicture): self
     {
         $this->urlpicture = $urlpicture;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }
