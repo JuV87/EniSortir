@@ -11,9 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route ("/trips, name="trip_")
- */
+
 
 class TripController extends AbstractController
 {
@@ -44,10 +42,10 @@ class TripController extends AbstractController
         return $this->render("trip/createtrip.html.twig", ['tripForm'=>$tripForm->createView()]);
     }
 
-    /**
+  /**
      * @Route (/detailtrip/{id}, name="details)
      */
-    public function details($id, TripRepository $tripRepository){
+   public function details($id, TripRepository $tripRepository){
         $trip=$tripRepository->find($id);
         if (!$trip){
             throw $this->createNotFoundException("Cette sortie n'est pas créée, désolée!");
