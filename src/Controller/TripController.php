@@ -12,20 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route ("/trips, name="trip_")
+ * @Route ("/trip", name="trip_")
  */
 
 class TripController extends AbstractController
 {
-    /**
-     * @Route("/trip", name="app_trip")
-     */
-    public function index(): Response
-    {
-        return $this->render('trip/triptest.html.twig', [
-            'controller_name' => 'TripController',
-        ]);
-    }
 
     /**
      * @Route("/createtrip", name="createtrip")
@@ -39,14 +30,15 @@ class TripController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', "Votre sortie a bien été crée!");
-            return $this->redirectToRoute('main_home');
+            return $this->redirectToRoute('home');
         }
         return $this->render("trip/createtrip.html.twig", ['tripForm'=>$tripForm->createView()]);
     }
 
     /**
-     * @Route (/detailtrip/{id}, name="details)
+     * @Route ("/detailtrip/{id}", name="details")
      */
+
     public function details($id, TripRepository $tripRepository){
         $trip=$tripRepository->find($id);
         if (!$trip){
@@ -55,4 +47,23 @@ class TripController extends AbstractController
         return $this->render("trip/details.html.twig", ['trip'=>$trip]);
     }
 
+    /**
+     * @Route ("/modify/{id}", name="modify")
+     */
+    public function modify($id, EntityManagerInterface $entityManager, Request $request, TripRepository $tripRepository){
+        $trip = $tripRepository->find($id);
+        if (!$trip){
+            throw $this->createNotFoundException('Attention, cette sortie n\'est pas dans la base de données!');
+        }
+        $tripForm = $this->createForm(TripType::class, $trip);
+        $tripForm->handleRequest($request);
+        if ($tripForm->isValid() && $tripForm->isSubmitted()){
+            $entityManager->persist($trip);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Votre sortie a bien été modifié !");
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('trip/modify.html.twig', ['tripForm'=>$tripForm->createView()]);
+    }
 }
