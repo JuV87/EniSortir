@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\LocationRepository;
+use App\Repository\EtatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LocationRepository::class)
+ * @ORM\Entity(repositoryClass=EtatRepository::class)
  */
-class Location
+class Etat
 {
     /**
      * @ORM\Id
@@ -22,10 +22,10 @@ class Location
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $name;
+    private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="location")
+     * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="etat")
      */
     private $trips;
 
@@ -39,14 +39,14 @@ class Location
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getLibelle(): ?string
     {
-        return $this->name;
+        return $this->libelle;
     }
 
-    public function setName(string $name): self
+    public function setLibelle(string $libelle): self
     {
-        $this->name = $name;
+        $this->libelle = $libelle;
 
         return $this;
     }
@@ -63,7 +63,7 @@ class Location
     {
         if (!$this->trips->contains($trip)) {
             $this->trips[] = $trip;
-            $trip->setLocation($this);
+            $trip->setEtat($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class Location
     {
         if ($this->trips->removeElement($trip)) {
             // set the owning side to null (unless already changed)
-            if ($trip->getLocation() === $this) {
-                $trip->setLocation(null);
+            if ($trip->getEtat() === $this) {
+                $trip->setEtat(null);
             }
         }
 
