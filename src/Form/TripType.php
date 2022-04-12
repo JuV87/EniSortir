@@ -12,14 +12,14 @@ class TripType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('datestart')
-            ->add('duration')
-            ->add('dateend')
-            ->add('nbsubscriptionmax')
-            ->add('descriptioninfos')
-            ->add('statustrip')
-            ->add('urlpicture')
+            ->add('name', null,['label'=>'Nom : ',])
+            ->add('datestart', null,['label'=>'Date et heure de la sortie : ',])
+            ->add('duration', null,['label'=>'Durée : ',])
+            ->add('dateend', null,['label'=>'Date limite d\'inscription : ',])
+            ->add('nbsubscriptionmax', null,['label'=>'Nombre de places : ',])
+            ->add('descriptioninfos', null,['label'=>'Description et infos : ',])
+            ->add('statustrip', null,['label'=>'Statut de la sortie : ',])
+            ->add('urlpicture', null,['label'=>'Ajouter une photo : ',])
         ;
     }
 
