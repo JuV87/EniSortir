@@ -2,9 +2,38 @@
 
 {% block body %}
 
+    <h1>Détails de la sortie {{ trip.name}} : </h1>
+<div class="container">
+    <div>Nom de la sortie : {{ trip.name }}</div>
+    <div>Date et heure de la sortie : {{ trip.datestart | localizeddate('long', 'short') }}</div>
+    <div>Date limite d'inscription : {{ trip.dateend |localizeddate('long', 'short') }}</div>
+    <div>Nombre de places : </div>
+    <div>Durée : {{ trip.duration }} minutes</div>
+    <div>Description et infos : {{ trip.descriptioninfos }}</div>
+    <div>Ville organisatrice : {{ trip.location.name }}</div>
+    <div>Lieu : </div>
+    <div>Rue : </div>
+    <div>Code postal : </div>
+    <div>Latitude : </div>
+    <div>Longitude : </div>
+
+</div>
+<diV>
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('trip_modify'), {'id':trip.id})}}"><button>Modifier la sortie</button></a>
+
+    {% endif %}
+
+</diV>
+    <div>
+        Liste des participants inscrits :
+    </div>
+
+
 {% endblock %}
 
 {% block title %}
+    {{ parent() | Modifier votre sortie }}
 
 {% endblock %}
 

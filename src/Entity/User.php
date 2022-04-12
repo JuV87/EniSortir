@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -77,6 +79,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="integer")
      */
     private $sites_no_site;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="organizer")
+     */
+    private $trips;
+
+    public function __construct()
+    {
+        $this->trips = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -260,6 +272,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSitesNoSite(string $sites_no_site): self
     {
         $this->sites_no_site = $sites_no_site;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Trip>
+     */
+    public function getTrips(): Collection
+    {
+        return $this->trips;
+    }
+
+    public function addTrip(Trip $trip): self
+    {
+        if (!$this->trips->contains($trip)) {
+            $this->trips[] = $trip;
+            $trip->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrip(Trip $trip): self
+    {
+        if ($this->trips->removeElement($trip)) {
+            // set the owning side to null (unless already changed)
+            if ($trip->getOrganizer() === $this) {
+                $trip->setOrganizer(null);
+            }
+        }
 
         return $this;
     }

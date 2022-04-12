@@ -24,6 +24,7 @@ class TripController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager){
         $trip = new Trip();
         $tripForm = $this->createForm(TripType::class, $trip);
+        $trip->setEtat(1);
         $tripForm->handleRequest($request);
         if ($tripForm->isSubmitted() && $tripForm->isValid()){
             $entityManager->persist($trip);
@@ -64,7 +65,9 @@ class TripController extends AbstractController
             $this->addFlash('success', "Votre sortie a bien été modifié !");
             return $this->redirectToRoute('home');
         }
-        return $this->render('trip/modify.html.twig', ['tripForm'=>$tripForm->createView()]);
+        return $this->render('trip/modify.html.twig', ['tripForm'=>$tripForm->createView(),
+        'trip'=>$trip
+        ]);
     }
 
     /**

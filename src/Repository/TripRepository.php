@@ -48,6 +48,7 @@ class TripRepository extends ServiceEntityRepository
         }
     }
 
+    /*
     public function tripList(User $user, Location $location):array
     {
         $queryBuilder = $this ->createQueryBuilder('t')
@@ -56,7 +57,7 @@ class TripRepository extends ServiceEntityRepository
         $query=$queryBuilder->getQuery();
         return $query->execute();
     }
-
+    */
     // /**
     //  * @return Trip[] Returns an array of Trip objects
     //  */

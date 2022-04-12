@@ -69,6 +69,12 @@ class Trip
      */
     private $location;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organizer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -190,6 +196,18 @@ class Trip
     public function setLocation(?Location $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getOrganizer(): ?User
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(?User $organizer): self
+    {
+        $this->organizer = $organizer;
 
         return $this;
     }
