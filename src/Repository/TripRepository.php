@@ -2,11 +2,14 @@
 
 namespace App\Repository;
 
+use App\Entity\Location;
 use App\Entity\Trip;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Env\Response;
 
 /**
  * @method Trip|null find($id, $lockMode = null, $lockVersion = null)
@@ -43,6 +46,15 @@ class TripRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function tripList(User $user, Location $location):array
+    {
+        $queryBuilder = $this ->createQueryBuilder('t')
+                    ->where("")
+                    ->andWhere('t.name LIKE :trip')
+        $query=$queryBuilder->getQuery();
+        return $query->execute();
     }
 
     // /**

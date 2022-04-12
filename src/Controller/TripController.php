@@ -66,4 +66,15 @@ class TripController extends AbstractController
         }
         return $this->render('trip/modify.html.twig', ['tripForm'=>$tripForm->createView()]);
     }
+
+    /**
+     * ("/tripList"/, name="tripList")
+     */
+    public function tripList(TripRepository $tripRepository){
+        $trip=$tripRepository->tripList();
+        if (!$trip){
+            throw $this->createNotFoundException("Cette sortie n'est pas créée, désolée!");
+        }
+        return $this->render("home.html.twig", ['trip'=>$trip]);
+    }
 }
