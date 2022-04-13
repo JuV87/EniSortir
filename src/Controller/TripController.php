@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Trip;
 use App\Form\TripType;
+use App\Repository\EtatRepository;
+use App\Repository\LocationRepository;
+use App\Repository\PlaceRepository;
 use App\Repository\TripRepository;
+use App\Repository\UserRepository;
 use App\Search\SearchForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,12 +27,17 @@ class TripController extends AbstractController
     /**
      * @Route("/createtrip", name="createtrip")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager){
+    public function create(Request $request, UserRepository $user, EntityManagerInterface $entityManager, EtatRepository $etatRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository){
+
         $trip = new Trip();
         $tripForm = $this->createForm(TripType::class, $trip);
-        $trip->setEtat(1);
         $tripForm->handleRequest($request);
         if ($tripForm->isSubmitted() && $tripForm->isValid()){
+            $trip->setEtat($etat = $etatRepository->find(1));
+            $trip->setLocation($location = $locationRepository->find(1));
+            $trip->setPlace($place =$placeRepository->find(1));
+            $trip->setOrganizer($user->find(1));
+
             $entityManager->persist($trip);
             $entityManager->flush();
 
@@ -60,6 +70,7 @@ class TripController extends AbstractController
         $tripForm = $this->createForm(TripType::class, $trip);
         $tripForm->handleRequest($request);
         if ($tripForm->isValid() && $tripForm->isSubmitted()){
+            $trip->setEtat("created");
             $entityManager->persist($trip);
             $entityManager->flush();
 
