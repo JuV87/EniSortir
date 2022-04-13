@@ -47,23 +47,20 @@ class TripRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-}
-/*
-    /**
-     * @return Trip[]
-     *
-     *//*
-    public function tripList(SearchForm $searchForm):array
+
+    public function tripList()
     {
-        $query = $this
-            ->createQueryBuilder('t')
-            ->select('t','l','e')
-            ->join('t.location','l')
-            ->join('t.etat','e')
-            ->
+        $entityManager = $this->getEntityManager();
+        $dql=" 
+        SELECT t 
+        FROM app\Entity\Trip t
+        ORDER BY t.name DESC
+        ";
+
+        $query = $entityManager->createQuery($dql);
+        return $query->getResult();
 
 
-        return $this->findAll();
     }
+
 }
-*/

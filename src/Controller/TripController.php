@@ -82,14 +82,7 @@ class TripController extends AbstractController
         ]);
     }
 
-    public function tripList(TripRepository $tripRepository){
 
-        $data = new SearchForm();
-        $form = $this->createForm(SearchForm::class, $data);
-        $trip=$tripRepository->tripList();
-        return $this->render("home.html.twig", [
-            'trip'=>$trip,
-            'form'=>$form->createView()]);
-    }
+
 
 }
