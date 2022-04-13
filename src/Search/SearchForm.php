@@ -36,12 +36,13 @@ class SearchForm extends AbstractType
                     'placeholder'=> 'search'
                 ]
             ])
+            /*
             ->add('location',EntityType::class, [
                 'label'=> 'Site',
                 'required'=>false,
                 'class'=>Location::class
 
-            ])
+            ])*/
         ;
     }
 }

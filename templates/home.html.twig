@@ -6,22 +6,12 @@
 
 
 {% block body %}
+<div>
+   <h1>Tableau des sorties</h1>
+    {% for t in trip %}
+   <p> {{ t.name }}</p>
+    {% endfor%}
+</div>
 
-
-        <div>
-            <h2>Filtrer les sorties</h2>
-           {%  include 'trip/_filter.html.twig' with {form:form} only %}
-        </div>
-
-        <div>
-            {% for trip in triplist %}
-                {{ trip:trip }}
-            {% endfor %}        </div>
-
-        <div>
-            <a href=#>
-                <button>Créer une sortie</button>
-            </a>
-        </div>
 {% endblock %}
 
