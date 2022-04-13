@@ -10,16 +10,13 @@
 
         <div>
             <h2>Filtrer les sorties</h2>
-            {# Site /Le nom de la sortie contient/plage de date
-        sorties dont je l'organisateur/trice /
-        Sortie auxquelles je suis inscrit
-        Sortie auxquelles je ne suis pas inscrit/e
-        Sortie passées#}
+           {%  include 'trip/_filter.html.twig' with {form:form} only %}
         </div>
 
         <div>
-            {# Tableau de resulats #}
-        </div>
+            {% for trip in triplist %}
+                {{ trip:trip }}
+            {% endfor %}        </div>
 
         <div>
             <a href=#>
