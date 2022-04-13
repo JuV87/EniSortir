@@ -20,7 +20,7 @@ class MainConstrollerController extends AbstractController
      */
     public function tripList(TripRepository $tripRepository): Response
     {
-        $trip=$tripRepository->listAllUser();
+        $trip=$tripRepository->tripList();
         return $this->render("home.html.twig",[
         "trip"=>$trip
         ]);

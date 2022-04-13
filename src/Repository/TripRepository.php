@@ -53,7 +53,7 @@ class TripRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         $dql=" 
         SELECT t 
-        FROM app\Entity\trip t
+        FROM app\Entity\Trip t
         ORDER BY t.name DESC
         ";
 
