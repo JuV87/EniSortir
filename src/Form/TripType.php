@@ -18,7 +18,6 @@ class TripType extends AbstractType
             ->add('dateend', null,['label'=>'Date limite d\'inscription : ',])
             ->add('nbsubscriptionmax', null,['label'=>'Nombre de places : ',])
             ->add('descriptioninfos', null,['label'=>'Description et infos : ',])
-            ->add('statustrip', null,['label'=>'Statut de la sortie : ',])
             ->add('urlpicture', null,['label'=>'Ajouter une photo : ',])
         ;
     }

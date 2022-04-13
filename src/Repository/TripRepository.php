@@ -64,5 +64,6 @@ class TripRepository extends ServiceEntityRepository
 
 
         return $this->findAll();
-    }/*
+    }
 }
+*/
