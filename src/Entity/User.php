@@ -33,14 +33,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string",length=20)
+     * @ORM\Column(type="string", length=250)
      */
     private $password;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $no_participant;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -64,12 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $administrateur;
-
-    /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",options={"default":0}, nullable=true)
      */
     private $actif;
 
@@ -167,18 +157,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getNoParticipant(): ?string
-    {
-        return $this->no_participant;
-    }
-
-    public function setNoParticipant(string $no_participant): self
-    {
-        $this->no_participant = $no_participant;
-
-        return $this;
-    }
-
     public function getPseudo(): ?string
     {
         return $this->pseudo;
@@ -227,18 +205,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
-    public function getAdministrateur(): ?string
-    {
-        return $this->administrateur;
-    }
-
-    public function setAdministrateur(string $administrateur): self
-    {
-        $this->administrateur = $administrateur;
-
-        return $this;
-    }
 
     public function getActif(): ?string
     {
