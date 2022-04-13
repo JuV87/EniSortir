@@ -5,11 +5,11 @@ namespace App\Repository;
 use App\Entity\Location;
 use App\Entity\Trip;
 use App\Entity\User;
+use App\Search\SearchForm;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-use http\Env\Response;
 
 /**
  * @method Trip|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,42 +47,22 @@ class TripRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+}
 /*
-    public function tripList(User $user, Location $location):array
+    /**
+     * @return Trip[]
+     *
+     *//*
+    public function tripList(SearchForm $searchForm):array
     {
-        $queryBuilder = $this ->createQueryBuilder('t')
-                    ->where("")
-                    ->andWhere('t.name LIKE :trip')
-        $query=$queryBuilder->getQuery();
-        return $query->execute();
-    }
-*/
-    // /**
-    //  * @return Trip[] Returns an array of Trip objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this
+            ->createQueryBuilder('t')
+            ->select('t','l','e')
+            ->join('t.location','l')
+            ->join('t.etat','e')
+            ->
 
-    /*
-    public function findOneBySomeField($value): ?Trip
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+
+        return $this->findAll();
+    }/*
 }

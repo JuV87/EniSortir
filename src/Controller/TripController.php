@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Trip;
 use App\Form\TripType;
 use App\Repository\TripRepository;
+use App\Search\SearchForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,14 +71,14 @@ class TripController extends AbstractController
         ]);
     }
 
-    /**
-     * ("/tripList"/, name="tripList")
-     */
     public function tripList(TripRepository $tripRepository){
+
+        $data = new SearchForm();
+        $form = $this->createForm(SearchForm::class, $data);
         $trip=$tripRepository->tripList();
-        if (!$trip){
-            throw $this->createNotFoundException("Cette sortie n'est pas créée, désolée!");
-        }
-        return $this->render("home.html.twig", ['trip'=>$trip]);
+        return $this->render("home.html.twig", [
+            'trip'=>$trip,
+            'form'=>$form->createView()]);
     }
+
 }
