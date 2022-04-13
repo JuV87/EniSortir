@@ -22,23 +22,24 @@ class RegistrationFormType extends AbstractType
             ->add('nom')
             ->add('telephone')
             ->add('email')
+            ->add('sitesNoSite')
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
+              'mapped' => false,
+               'attr' => ['autocomplete' => 'new-password'],
+               'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
                     ]),
-                    new Length([
+                  new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
-                    ]),
+                   ]),
                 ],
-            ])
+                 ])
         ;
     }
 
