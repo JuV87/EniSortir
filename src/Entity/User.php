@@ -75,6 +75,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $trips;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $location;
+
     public function __construct()
     {
         $this->trips = new ArrayCollection();
@@ -268,6 +274,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $trip->setOrganizer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }

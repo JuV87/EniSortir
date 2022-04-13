@@ -29,9 +29,15 @@ class Location
      */
     private $trips;
 
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="location")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->trips = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,6 +81,36 @@ class Location
             // set the owning side to null (unless already changed)
             if ($trip->getLocation() === $this) {
                 $trip->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getLocation() === $this) {
+                $user->setLocation(null);
             }
         }
 
