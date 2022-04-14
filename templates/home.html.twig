@@ -6,12 +6,50 @@
 
 
 {% block body %}
-<div>
-   <h1>Tableau des sorties</h1>
-    {% for t in trip %}
-   <p> {{ t.name }}</p>
-    {% endfor%}
-</div>
+    <div>
+        <h2>Filtrez vos recherches</h2>
+            {{ form_start(searchForm) }}
+             {{ form_widget(searchForm) }}
+             <br>
+            <a href="{{ path('home') }}"><button> Rechercher</button></a>
+            {{ form_end(searchForm) }}
+    </div>
+
+    <div>
+       <h1>Tableau des sorties</h1>
+       <table style="border: black 1px solid">
+          <tr style="border: black 1px solid">
+             <th>Nom de la sortie</th>
+             <th>Date de la sortie</th>
+             <th>Cloture</th>
+             <th>Inscrit/Place</th>
+             <th>Etat</th>
+             <th>Organisateur</th>
+             <th>Actions</th>
+          </tr>
+           {% for t in AllTrip %}
+              <tr style="border: black 1px solid">
+                 <td>{{ t.name }}</td>
+                 <td>{{t.datestart |date("d/m/Y i:H")}}</td>
+                 <td>{{ t.dateend | date("d/m/Y") }}</td>
+                 <td>0/ {{ t.nbsubscriptionmax }}</td>
+                 <td>{{ t.etat.libelle }}</td>
+                 <td> {{ t.organizer.nom }}</td>
+                 <td>
+                       <a href="#">Détails</a>
+                    {%if(is_granted("ROLE_ADMIN"))  %}
+                      <a href="#">Modifier</a>
+                    {% endif %}
+                    {% if is_granted("ROLE_ADMIN") and t.etat.id ==1 %}
+                      <a href="#">Publier</a>
+                    {% endif %}
+                 </td>
+              </tr>
+
+           {% endfor%}
+       </table>
+
+    </div>
 
 {% endblock %}
 

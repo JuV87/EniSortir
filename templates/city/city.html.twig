@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les villes{% endblock %}
+
+{% block body %}
+    <h1>Gérer les villes</h1>
+
+     <div>
+         <h2>Filtrez les villes</h2>
+         {{ form(searchForm) }}
+     </div>
+    <div>
+        <h1>Liste des villes</h1>
+        <table style="border: black 1px solid">
+            <tr style="border: black 1px solid">
+                <th>Ville</th>
+                <th>Code Postal</th>
+                <th>Actions</th>
+            </tr>
+            {% for c in allCity %}
+                <tr style="border: black 1px solid">
+                    <td>{{ c.name }}</td>
+                    <td>{{c.codePostal}}</td>
+
+                    <td>
+                    <a href="#">Modifier</a>
+                    <a href="#">Supprimer</a>
+                    </td>
+                </tr>
+
+            {% endfor%}
+
+        </table>
+    </div>
+
+
+{% endblock %}

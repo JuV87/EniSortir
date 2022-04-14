@@ -10,6 +10,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Env\Response;
 
 /**
  * @method Trip|null find($id, $lockMode = null, $lockVersion = null)
@@ -48,19 +49,18 @@ class TripRepository extends ServiceEntityRepository
         }
     }
 
-    public function tripList()
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function getAllTrip()
     {
-        $entityManager = $this->getEntityManager();
-        $dql=" 
-        SELECT t 
-        FROM app\Entity\Trip t
-        ORDER BY t.name DESC
-        ";
-
-        $query = $entityManager->createQuery($dql);
-        return $query->getResult();
+        $queryBuilder=$this->createQueryBuilder('trip');
+        $queryBuilder ->andWhere('trip.name LIKE ?1' );
+        $query=$queryBuilder->getQuery();
 
 
+        return $query;
     }
 
 }
