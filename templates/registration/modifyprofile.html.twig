@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+{#
+    <h1>Inscription</h1>
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
@@ -15,5 +16,14 @@
         <button type="reset" classe="btn">Annuler</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
+#}
 
+   <h2>Modifier votre profil : </h2>
+    <div>
+        {{ form_start(registrationForm) }}
+        {{ form_widget(registrationForm) }}
+        <br>
+        <button>Valider votre modification !</button>
+        {{ form_end(registrationForm) }}    </div>
 
+{% endblock %}
