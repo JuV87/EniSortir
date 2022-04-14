@@ -1,24 +1,3 @@
-{% extends 'base.html.twig' %}
-
-
-{% block body %}
-
-    <h1> Créer une sortie</h1>
-        {{ form_start(tripForm) }}
-        {{ form_widget(tripForm) }}
-
-        <button>Enregistrer</button>
-
-        {{ form_end(tripForm) }}
-
-    <button>Publier la sortie</button>
-    <button>Annuler</button>
-
-{% endblock %}
-
-  {% block javascript %}
-  {{ parent() }}
-  <script >
 
 /* sur changement de la données dans la liste deroulante de ville ...*/
 $(document).on('change', '#trip_city', function () {
@@ -38,17 +17,9 @@ function chargerListeLieux() {
         $('#trip_place').html(''); //initialisation de la liste des lieux
         //chargement des lieux fournis dans la response, dans la liste deroulante
         for (var i = 0; i < response.length; i++) {
-            var place = response[i];
+            var lieu = response[i];
             let option = $('<option value="' + place["id"] + '">' + place["name"] + '</option>');
             $('#trip_place').append(option);
         }
     })
 }
-
-</script>
-  {% endblock %}
-
-{% block title %}
-{{ parent() }} | Créer une sortie
-{% endblock %}
-
