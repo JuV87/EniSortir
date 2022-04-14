@@ -66,11 +66,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $actif;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $sites_no_site;
-
-    /**
      * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="organizer")
      */
     private $trips;
@@ -232,18 +227,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActif(string $actif): self
     {
         $this->actif = $actif;
-
-        return $this;
-    }
-
-    public function getSitesNoSite(): ?string
-    {
-        return $this->sites_no_site;
-    }
-
-    public function setSitesNoSite(string $sites_no_site): self
-    {
-        $this->sites_no_site = $sites_no_site;
 
         return $this;
     }

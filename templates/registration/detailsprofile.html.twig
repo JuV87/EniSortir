@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block body %}
+
+    <h1>Details du profil</h1>
+    <h3>{{ user.pseudo }}</h3>
+    <article>
+        <div>Prénom: {{ user.prenom }}</div>
+        <div>Nom: {{ user.nom }}</div>
+        <div>Téléphone: {{ user.telephone }}</div>
+        <div>Email: {{ user.email }}</div>
+{#      <div>Ville de rattachement: {{ user.location }}</div>   #}
+    </article>
+    <input type=button onclick="{{ path ('modify_profile',{ id: app.user.id } ) }}" value=Modifier />
+
+
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Security\AppAuthentificatorAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,7 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile", name="app_profile")
      */
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserAuthenticatorInterface $userAuthenticator, AppAuthentificatorAuthenticator $authenticator) : Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserAuthenticatorInterface $userAuthenticator, AppAuthentificatorAuthenticator $authenticator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -28,7 +29,7 @@ class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
@@ -39,17 +40,51 @@ class ProfileController extends AbstractController
             // do anything else you need here, like send an email
 
 
-            return $userAuthenticator ->authenticateUser(
+            return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
             );
 
-    //        return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/profile.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/details/{id}", name="details")
+     */
+    public function details($id, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+        return $this->render('registration/detailsprofile.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+
+    /**
+     * @Route("/modify/{id}", name="modify_profile")
+     */
+    public function modify($id, Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager)
+    {
+        $user = $userRepository->find($id);
+        if (!$user) {
+            throw $this->createNotFoundException('oops, pas dans la base de données!');
+        }
+        $registrationForm = $this->createForm(RegistrationFormType::class, $user);
+        $registrationForm->handleRequest($request);
+        if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            //               $this->addFlash('success', "Votre produit a bien été modifié");
+            //               return $this->redirectToRoute('main_home');
+        }
+        return $this->render("registration/modifyprofile.html.twig", ['$registrationForm' => $registrationForm->createView()]);
+    }
+
+
+
 }
