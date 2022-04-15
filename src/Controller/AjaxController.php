@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Controller;
+
 use App\Entity\City;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,6 +39,8 @@ class AjaxController extends AbstractController
             return new JsonResponse($json_data);
         }
     }
+
+
 
 
 }

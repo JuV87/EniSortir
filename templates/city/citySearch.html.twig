@@ -3,15 +3,14 @@
 {% block title %}Gérer les villes{% endblock %}
 
 {% block body %}
-    <h1>Gérer les villes</h1>
+    <h1>Recherche</h1>
 
-     <div>
-         <h2>Filtrez les villes</h2>
-         {{ form_start(searchForm) }}
-         {{ form(searchForm) }}
-         <button>Enregistrer</button>
-         {{ form_end(searchForm) }}
-     </div>
+    <div>
+        <h2>Filtrez les villes</h2>
+        {{ form_start(searchForm) }}
+        {{ form(searchForm) }}
+        {{ form_end(searchForm) }}
+    </div>
     <div>
         <h1>Liste des villes</h1>
         <table style="border: black 1px solid">
@@ -26,8 +25,8 @@
                     <td>{{c.codePostal}}</td>
 
                     <td>
-                    <a href="#">Modifier</a>
-                    <a href="#">Supprimer</a>
+                        <a href="#">Modifier</a>
+                        <a href="#">Supprimer</a>
                     </td>
                 </tr>
 

@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * @method City|null find($id, $lockMode = null, $lockVersion = null)
@@ -49,14 +50,20 @@ class CityRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function searchCity()
+    public function searchCity(string $query)
     {
         $queryBuilder=$this->createQueryBuilder('city');
-        $queryBuilder ->andWhere('city.name LIKE %val%' );
-        $query=$queryBuilder->getQuery();
+        $queryBuilder
+
+            ->where(
+                $queryBuilder->expr()->like('city.name',':query')
+            )
+            ->setParameter('query','%'.$query.'%');
 
 
-        return $query;
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
     }
 
 }
