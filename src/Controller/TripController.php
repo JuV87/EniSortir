@@ -60,15 +60,15 @@ class TripController extends AbstractController
     /**
      * @Route ("/modify/{id}", name="modify")
      */
-    public function modify($id, EntityManagerInterface $entityManager, Request $request, TripRepository $tripRepository){
+    public function modify($id, EntityManagerInterface $entityManager, EtatRepository $etatRepository, Request $request, TripRepository $tripRepository){
         $trip = $tripRepository->find($id);
         if (!$trip){
             throw $this->createNotFoundException('Attention, cette sortie n\'est pas dans la base de données!');
         }
         $tripForm = $this->createForm(TripType::class, $trip);
         $tripForm->handleRequest($request);
-        if ($tripForm->isValid() && $tripForm->isSubmitted()){
-            $trip->setEtat("created");
+        if ( $tripForm->isSubmitted() && $tripForm->isValid()){
+            $trip->setEtat($etat = $etatRepository->find(1));
             $entityManager->persist($trip);
             $entityManager->flush();
 
@@ -79,6 +79,7 @@ class TripController extends AbstractController
         'trip'=>$trip
         ]);
     }
+
 
 
 

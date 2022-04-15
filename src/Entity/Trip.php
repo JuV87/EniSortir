@@ -52,10 +52,6 @@ class Trip
      */
     private $statustrip;
 
-    /**
-     * @ORM\Column(type="string", length=250)
-     */
-    private $urlpicture;
 
     /**
      * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="trips")
@@ -166,18 +162,6 @@ class Trip
     public function setStatustrip(?int $statustrip): self
     {
         $this->statustrip = $statustrip;
-
-        return $this;
-    }
-
-    public function getUrlpicture(): ?string
-    {
-        return $this->urlpicture;
-    }
-
-    public function setUrlpicture(string $urlpicture): self
-    {
-        $this->urlpicture = $urlpicture;
 
         return $this;
     }

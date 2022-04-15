@@ -2,7 +2,7 @@
     <ul>
         <li><a href="{{ path('home') }}" title="Homapage" alt="">Accueil</a></li>
         <li><a href="{{ path('details', { id: app.user.id }) }}" title="My Account" alt="">Mon profil</a></li>
-        <li><a href= "{{ path('app_logout') }}" title=Logout>Se déconnecter </a></li>
+        <li><a href= "{{ path('app_logout') }}" title=Logout>Se déconnecter({{app.user.pseudo }}) </a></li>
 
         {% if is_granted("ROLE_ADMIN") %}
         <li><a href="{{ path('app_city')}}" title="Cities" alt=""> Villes</a></li>
