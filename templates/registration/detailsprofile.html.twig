@@ -11,9 +11,11 @@
         <div>Nom: {{ user.nom }}</div>
         <div>Téléphone: {{ user.telephone }}</div>
         <div>Email: {{ user.email }}</div>
-{#      <div>Ville de rattachement: {{ user.location }}</div>   #}
+        <div>Ville de rattachement: {{ user.location.name }}</div>
     </article>
-    <input type=button onclick="{{ path ('modify_profile',{ id: app.user.id } ) }}" value=Modifier />
-
+{#    <input type=button onclick="{{ path ('modify_profile',{ id: app.user.id } ) }}" value=Modifier />
+    <button type="submit" formaction="/registration/modifyprofile.html.twig">Modifier</button>
+    <a href="{{ path ('modify_profile',{ id: app.user.id } ) }}" class="button">Cliquez ici</a>#}
+    <input type="button" onclick="window.location.href = '{{ path ('modify_profile',{ id: app.user.id } ) }}';" value="Modifier" />
 
 {% endblock %}
