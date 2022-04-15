@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Controller;
+
 use App\Entity\City;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;

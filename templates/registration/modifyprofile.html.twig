@@ -16,14 +16,15 @@
         <button type="reset" classe="btn">Annuler</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
+
 #}
 
    <h2>Modifier votre profil : </h2>
-    <div>
+
         {{ form_start(registrationForm) }}
         {{ form_widget(registrationForm) }}
         <br>
         <button>Valider votre modification !</button>
-        {{ form_end(registrationForm) }}    </div>
+        {{ form_end(registrationForm) }}
 
 {% endblock %}
