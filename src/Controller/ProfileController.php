@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangePasswordFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\AppAuthentificatorAuthenticator;
@@ -17,6 +18,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProfileController extends AbstractController
 {
+
+//Inscription d'un utilisateur
     /**
      * @Route("/profile", name="app_profile")
      */
@@ -53,6 +56,7 @@ class ProfileController extends AbstractController
         ]);
     }
 
+// Détails de l'utilisateur
     /**
      * @Route("/details/{id}", name="details")
      */
@@ -65,6 +69,7 @@ class ProfileController extends AbstractController
     }
 
 
+//Modification de l'utilisateur
     /**
      * @Route("/modify/{id}", name="modify_profile")
      */
@@ -82,9 +87,6 @@ class ProfileController extends AbstractController
             //               $this->addFlash('success', "Votre produit a bien été modifié");
             //               return $this->redirectToRoute('main_home');
         }
-        return $this->render("registration/modifyprofile.html.twig", ['$registrationForm' => $registrationForm->createView()]);
+        return $this->render("registration/modifyprofile.html.twig", ['registrationForm' => $registrationForm->createView()]);
     }
-
-
-
 }
