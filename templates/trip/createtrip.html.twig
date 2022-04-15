@@ -7,6 +7,7 @@
         {{ form_start(tripForm) }}
         {{ form_widget(tripForm) }}
 
+        <div> Ville organisatrice : {{ app.user.location.name }}</div>
         <button>Enregistrer</button>
 
         {{ form_end(tripForm) }}
@@ -18,7 +19,7 @@
 
   {% block javascript %}
   {{ parent() }}
-  <script >
+  <script>
 
 /* sur changement de la données dans la liste deroulante de ville ...*/
 $(document).on('change', '#trip_city', function () {

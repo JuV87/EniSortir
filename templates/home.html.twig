@@ -36,9 +36,9 @@
                  <td>{{ t.etat.libelle }}</td>
                  <td> {{ t.organizer.nom }}</td>
                  <td>
-                       <a href="#">Détails</a>
+                       <a href={{ path('trip_details', { id:t.id }) }}>Détails</a>
                     {%if(is_granted("ROLE_ADMIN"))  %}
-                      <a href="#">Modifier</a>
+                      <a href="{{ path('trip_modify', {id:t.id}) }}">Modifier</a>
                     {% endif %}
                     {% if is_granted("ROLE_ADMIN") and t.etat.id ==1 %}
                       <a href="#">Publier</a>

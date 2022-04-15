@@ -24,14 +24,12 @@ class TripType extends AbstractType
             ->add('dateend', null,['label'=>'Date limite d\'inscription : ',])
             ->add('nbsubscriptionmax', null,['label'=>'Nombre de places : ',])
             ->add('descriptioninfos', null,['label'=>'Description et infos : ',])
-            //->add('villeorganisatrice', null,['label'=>'Ville organisatrice : ', 'disabled'])
             ->add('city', EntityType::class, ['class'=> 'App\Entity\City',
                                                     'choice_label'=>'name',
                                                      'label'=> 'Ville : ',
                                                      'mapped' => false,
                                                     'placeholder' =>'Sélectionner une ville : '
             ])
-            ->add('urlpicture', null,['label'=>'Ajouter une photo : ',])
         ;
 
         $builder->get('city')->addEventListener(
@@ -48,6 +46,7 @@ class TripType extends AbstractType
                 $data = $event->getData();
                 /* @var $lieu \App\Entity\Place */
                 $lieu = $data->getPlace();
+
                 $form = $event->getForm();
                 if($lieu){
                     $ville = $lieu->getCity();
@@ -67,12 +66,13 @@ private function addLieuField(FormInterface $form, ?City $city){
         'class' => Place::class,
         'label'=> 'Lieu :',
         'choice_label' => 'name',
-        'placeholder' => $city ? 'Selectionnez votre lieu' : 'Selectionnez votre ville',
+        'placeholder' => $city ? 'Sélectionnez votre lieu' : 'Sélectionnez une ville',
         'required' => true,
         'auto_initialize' => false,
         'choices' => $city ? $city->getPlaces() : []
     ]);
 }
+
 
 
     public function configureOptions(OptionsResolver $resolver): void
