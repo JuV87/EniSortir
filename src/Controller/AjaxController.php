@@ -42,6 +42,29 @@ class AjaxController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/ajax/ville_rechercher", name="ajax_ville_rechercher")
+     */
+    public function ville_rechercher(Request $request, EntityManagerInterface $entityManager){
+        $recherche = $request->request->get('recherche');
+        $villes = $entityManager->getRepository(City::class)->findAjaxRecherche($recherche);
+        if ($request->isXmlHttpRequest()) {
+            $jsonData = array();
+            $idx = 0;
+            foreach($villes as $ville) {
+                $temp = array(
+                    'id' => $ville->getId(),
+                    'nom' => $ville->getNom(),
+                    'code_postal' => $ville->getCodePostal(),
+                );
+                $jsonData[$idx++] = $temp;
+            }
+            return new JsonResponse($jsonData);
+        } else {
+            return $this->redirectToRoute('home');
+        }
+    }
+
 
 
 

@@ -7,6 +7,7 @@ use App\Entity\Place;
 use App\Entity\Trip;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -30,6 +31,7 @@ class TripType extends AbstractType
                                                      'mapped' => false,
                                                     'placeholder' =>'Sélectionner une ville : '
             ])
+            ->add('reset', ResetType::class,array("label"=>'Annuler'))
         ;
 
         $builder->get('city')->addEventListener(

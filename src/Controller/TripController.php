@@ -23,18 +23,19 @@ class TripController extends AbstractController
 {
 
     /**
-     * @Route("/createtrip", name="createtrip")
+     * @Route("/createtrip/{id}", name="createtrip")
      */
-    public function create(Request $request, UserRepository $user, EntityManagerInterface $entityManager, EtatRepository $etatRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository){
+    public function create($id, Request $request, UserRepository $user, EntityManagerInterface $entityManager, EtatRepository $etatRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository){
 
         $trip = new Trip();
+        $currentUser = $user->find($id);
         $tripForm = $this->createForm(TripType::class, $trip);
         $tripForm->handleRequest($request);
         if ($tripForm->isSubmitted() && $tripForm->isValid()){
             $trip->setEtat($etat = $etatRepository->find(1));
-            $trip->setLocation($location = $locationRepository->find(1));
+            $trip->setLocation($location = $locationRepository->find($user->find($id)->getId()));
             $trip->setPlace($place =$placeRepository->find(1));
-            $trip->setOrganizer($user->find(1));
+            $trip->setOrganizer($user->find($user->find($id)->getId()));
 
             $entityManager->persist($trip);
             $entityManager->flush();
@@ -42,7 +43,9 @@ class TripController extends AbstractController
             $this->addFlash('success', "Votre sortie a bien été crée!");
             return $this->redirectToRoute('home');
         }
-        return $this->render("trip/createtrip.html.twig", ['tripForm'=>$tripForm->createView()]);
+        return $this->render("trip/createtrip.html.twig", ['tripForm'=>$tripForm->createView(),
+                                                                'user'=>$currentUser
+        ]);
     }
 
     /**
@@ -62,11 +65,12 @@ class TripController extends AbstractController
      */
     public function modify($id, EntityManagerInterface $entityManager, EtatRepository $etatRepository, Request $request, TripRepository $tripRepository){
         $trip = $tripRepository->find($id);
+        $tripForm = $this->createForm(TripType::class, $trip);
+        $tripForm->handleRequest($request);
         if (!$trip){
             throw $this->createNotFoundException('Attention, cette sortie n\'est pas dans la base de données!');
         }
-        $tripForm = $this->createForm(TripType::class, $trip);
-        $tripForm->handleRequest($request);
+
         if ( $tripForm->isSubmitted() && $tripForm->isValid()){
             $trip->setEtat($etat = $etatRepository->find(1));
             $entityManager->persist($trip);
@@ -78,6 +82,41 @@ class TripController extends AbstractController
         return $this->render('trip/modify.html.twig', ['tripForm'=>$tripForm->createView(),
         'trip'=>$trip
         ]);
+    }
+    /**
+     * @Route ("/delete/{id}", name="delete")
+     */
+    public function modify_delete($id, EntityManagerInterface $entityManager, Request $request, TripRepository $tripRepository){
+
+        $trip = $tripRepository->find($id);
+        if (!$trip){
+            throw $this->createNotFoundException('Attention, cette sortie n\'est pas dans la base de données!');
+        }
+            $entityManager->remove($trip);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Votre sortie a bien été annulée !");
+
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route ("/update/{id}", name="update")
+     */
+    public function update($id, EtatRepository $etatRepository,EntityManagerInterface $entityManager, Request $request, TripRepository $tripRepository){
+
+        $trip = $tripRepository->find($id);
+        if (!$trip){
+            throw $this->createNotFoundException('Attention, cette sortie n\'est pas dans la base de données!');
+        }
+        $trip->setEtat($etat = $etatRepository->find(2));
+
+        $entityManager->persist($trip);
+        $entityManager->flush();
+
+        $this->addFlash('success', "Votre sortie a bien été publiée !");
+
+        return $this->redirectToRoute('home');
     }
 
 
