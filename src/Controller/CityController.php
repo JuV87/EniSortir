@@ -21,13 +21,13 @@ class CityController extends AbstractController
       $search = new City();
 
         $searchForm = $this->createForm(SearchCityType::class, $search);
-        $searchForm->handleRequest($request);
-            if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-
-            $allCities = $cityRepository->findBy();
-            $this->render('city/city.html.twig', ['searchForm' => $searchForm->createView(),
-                'allCities'=>$allCities]);
-            }
+//        $searchForm->handleRequest($request);
+////            if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+////
+////            $allCities = $cityRepository->findBy();
+////            $this->render('city/city.html.twig', ['searchForm' => $searchForm->createView(),
+////                'allCities'=>$allCities]);
+////            }
 
         $allCities = $cityRepository->findAll();
         return $this->render("city/city.html.twig", ['searchForm' => $searchForm->createView(),
