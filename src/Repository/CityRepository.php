@@ -66,4 +66,8 @@ class CityRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAjaxRecherche($recherche){
+
+    }
+
 }

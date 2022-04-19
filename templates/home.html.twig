@@ -8,10 +8,11 @@
 {% block body %}
     <div>
         <h2>Filtrez vos recherches</h2>
-            {{ form_start(searchForm) }}
-             {{ form_widget(searchForm) }}
-             <br>
-            <a href="{{ path('home') }}"><button> Rechercher</button></a>
+
+        {% set x =app.user.location.id %}
+        {{ form_start(searchForm) }}
+        {#             {{ form(searchForm.site) }}#}
+              {{ form_widget(searchForm.site, {value: x|trans  } ) }}
             {{ form_end(searchForm) }}
     </div>
 
@@ -41,7 +42,7 @@
                       <a href="{{ path('trip_modify', {id:t.id}) }}">Modifier</a>
                     {% endif %}
                     {% if is_granted("ROLE_ADMIN") and t.etat.id ==1 %}
-                      <a href="#">Publier</a>
+                      <a href="{{ path('trip_update', {id:t.id}) }}">Publier</a>
                     {% endif %}
                  </td>
               </tr>
