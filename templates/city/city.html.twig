@@ -7,9 +7,9 @@
 
      <div>
          <h2>Filtrez les villes</h2>
-         {{ form_start(searchForm) }}
-         {{ form(searchForm) }}
-         {{ form_end(searchForm) }}
+
+         <input type="text" id="input" onkeyup="search()" placeholder="Recherchez par ville">
+
      </div>
     <div>
         <h1>Liste des villes</h1>
@@ -42,7 +42,7 @@
         function search() {
               let input, filter, table, tr, td, i;
 
-              input = document.getElementById("search_city_name");
+              input = document.getElementById("input");
               filter = input.value.toUpperCase();
               table = document.getElementById("name_trip");
               tr = table.getElementsByTagName("tr");
