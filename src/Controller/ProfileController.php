@@ -81,6 +81,7 @@ class ProfileController extends AbstractController
         }
         $registrationForm = $this->createForm(RegistrationFormType::class, $user);
         $registrationForm->handleRequest($request);
+
         if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
