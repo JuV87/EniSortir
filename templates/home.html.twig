@@ -11,9 +11,8 @@
 
         {% set x =app.user.location.id %}
         {{ form_start(searchForm) }}
-        {#             {{ form(searchForm.site) }}#}
-              {{ form_widget(searchForm.site, {value: x|trans  } ) }}
-            {{ form_end(searchForm) }}
+            {{ form_widget(searchForm.site, {value: x|trans  } ) }}
+        {{ form_end(searchForm) }}
     </div>
 
     <div>

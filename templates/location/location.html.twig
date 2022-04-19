@@ -28,7 +28,12 @@
                 </tr>
 
             {% endfor%}
-
+            <tr>
+                {{ form_start(searchForm) }}
+                <td>{{ form_row(searchForm.name) }}</td>
+                <td><input type="submit" value="Ajouter"></td>
+                {{ form_end(searchForm) }}
+            </tr>
         </table>
     </div>
     {% block javascript %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Location;
+use App\Form\AddLocationType;
 use App\Form\SearchLocationType;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,12 +19,17 @@ class LocationController extends AbstractController
      */
     public function index(LocationRepository $locationRepository, Request $request,EntityManagerInterface $entityManager): Response
     {
-        $search = new Location();
-        $searchForm = $this->createForm(SearchLocationType::class, $search);
+        $newLocation = new Location();
+        $searchForm = $this->createForm(AddLocationType::class);
         $searchForm->handleRequest($request);
-        if ($searchForm->isSubmitted()) {
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
 
-        $allLocation = $locationRepository->searchCity();
+            $newLocation =$searchForm->getData();
+             $entityManager->persist($newLocation);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Votre campus a bien été crée!");
+            return $this->redirectToRoute('app_location');
         }
 
         $allLocation = $locationRepository->findAll();
