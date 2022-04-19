@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Cassandra\Blob;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -64,6 +65,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean",options={"default":0}, nullable=true)
      */
     private $actif;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $photo;
 
     /**
      * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="organizer")
@@ -227,6 +233,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActif(string $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($newFilename): self
+    {
+        $this->photo = $newFilename;
 
         return $this;
     }

@@ -6,7 +6,9 @@
 
     <h1>Details du profil</h1>
     <h3>{{ user.pseudo }}</h3>
+    <img src="{{ asset('uploads/article_image/'~ user.photo ) }}">
     <article>
+        <br>
         <div>Prénom: {{ user.prenom }}</div>
         <div>Nom: {{ user.nom }}</div>
         <div>Téléphone: {{ user.telephone }}</div>
