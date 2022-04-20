@@ -2,7 +2,7 @@
     <ul>
         {% if is_granted("ROLE_USER") %}  <!--A garder sinon erreur pour mot de passe oublié  -->
         <li><a href="{{ path('home') }}" title="Homepage" alt="">Accueil</a></li>
-        <li><a href="{{ path('details', { id: app.user.id }) }}" title="My Account" alt="">Mon profil</a></li>
+        <li><a href="{{ path('details')}}" title="My Account" alt="">Mon profil</a></li>
         <li><a href= "{{ path('app_logout') }}" title=Logout>Se déconnecter({{app.user.pseudo }}) <img src="{{ asset('uploads/article_image/'~ app.user.photo ) }}"width="30" height="30"></a></li>
         {% endif %}
         {% if is_granted("ROLE_ADMIN") %}
