@@ -25,8 +25,8 @@
                     <td>{{c.codePostal}}</td>
 
                     <td>
-                    <a href="#">Modifier</a>
-                    <a href="#">Supprimer</a>
+                    <a href="{{ path('city_modify', {id:c.id}) }}">Modifier</a>
+                    <a href="{{ path('city_delete', {id: c.id}) }}">Supprimer</a>
                     </td>
                 </tr>
 

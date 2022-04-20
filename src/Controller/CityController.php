@@ -35,6 +35,47 @@ class CityController extends AbstractController
             'allCities'=>$allCities]);
 }
 
+    /**
+     * @Route ("city/delete/{id}", name="city_delete")
+     */
+    public function delete($id, EntityManagerInterface $entityManager, Request $request, CityRepository $cityRepository){
+
+        $city = $cityRepository->find($id);
+        if (!$city){
+            throw $this->createNotFoundException('Attention, cette ville n\'est pas dans la base de données!');
+        }
+        $entityManager->remove($city);
+        $entityManager->flush();
+
+        $this->addFlash('success', "Votre ville a bien été supprimée !");
+
+        return $this->redirectToRoute('app_city');
+    }
+
+    /**
+     * @Route ("/modify/{id}", name="city_modify")
+     */
+    public function modify($id, EntityManagerInterface $entityManager, CityRepository $cityRepository, Request $request){
+        $city = $cityRepository->find($id);
+        $searchForm = $this->createForm(AddCityType::class, $city);
+        $searchForm->handleRequest($request);
+        if (!$city){
+            throw $this->createNotFoundException('Attention, cette ville n\'est pas dans la base de données!');
+        }
+
+        if ( $searchForm->isSubmitted() && $searchForm->isValid()){
+
+            $entityManager->persist($city);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Votre ville a bien été modifiée !");
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('city/modify.html.twig', ['searchForm'=> $searchForm->createView(),
+            'city'=> $city
+        ]);
+    }
+
 
 }
 

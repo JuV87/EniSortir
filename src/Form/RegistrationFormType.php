@@ -31,6 +31,22 @@ class RegistrationFormType extends AbstractType
                 'class' => Location::class,
                 'choice_label' => 'name'
             ])
+            ->add('plainPassword', PasswordType::class, [
+                'mapped'=> false,
+                'attr' => ['autocomplete' => 'new-password'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a password',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                ],
+            ])
+
             ->add('photo', FileType::class, [
                 'mapped' => false,
                 'required' => false,

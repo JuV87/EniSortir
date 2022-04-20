@@ -36,4 +36,45 @@ class LocationController extends AbstractController
         return $this->render("location/location.html.twig", ['searchForm' => $searchForm->createView(),
             'allLocation'=>$allLocation]);
         }
+
+    /**
+     * @Route ("location/delete/{id}", name="location_delete")
+     */
+    public function delete($id, EntityManagerInterface $entityManager, Request $request, LocationRepository $locationRepository){
+
+        $location = $locationRepository->find($id);
+        if (!$location ){
+            throw $this->createNotFoundException('Attention, ce site n\'est pas dans la base de données!');
+        }
+        $entityManager->remove($location);
+        $entityManager->flush();
+
+        $this->addFlash('success', "Votre site a bien été supprimé !");
+
+        return $this->redirectToRoute('app_location');
+    }
+
+    /**
+     * @Route ("/modify/{id}", name="location_modify")
+     */
+    public function modify($id, EntityManagerInterface $entityManager, LocationRepository $locationRepository, Request $request){
+        $location = $locationRepository->find($id);
+        $searchForm = $this->createForm(AddLocationType::class, $location);
+        $searchForm->handleRequest($request);
+        if (!$location){
+            throw $this->createNotFoundException('Attention, ce site n\'est pas dans la base de données!');
+        }
+
+        if ( $searchForm->isSubmitted() && $searchForm->isValid()){
+
+            $entityManager->persist($location);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Votre site a bien été modifié !");
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('location/modify.html.twig', ['searchForm'=> $searchForm->createView(),
+            'location'=> $location
+        ]);
+    }
 }

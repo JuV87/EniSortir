@@ -7,6 +7,7 @@
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
+
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
@@ -14,6 +15,9 @@
         <button type="submit" class="btn">Enregistrer</button>
         <button type="reset" class="btn">Annuler</button>
     {{ form_end(registrationForm) }}
+
+
+
 {% endblock %}
 
 

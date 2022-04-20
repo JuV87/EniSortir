@@ -28,10 +28,12 @@ class ProfileController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
+
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            $user->setRoles(["ROLE_USER"]);
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -42,13 +44,6 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-
-
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
 
         }
 
