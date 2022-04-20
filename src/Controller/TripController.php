@@ -54,6 +54,7 @@ class TripController extends AbstractController
 
     public function details($id, TripRepository $tripRepository){
         $trip=$tripRepository->find($id);
+        
         if (!$trip){
             throw $this->createNotFoundException("Cette sortie n'est pas créée, désolée!");
         }

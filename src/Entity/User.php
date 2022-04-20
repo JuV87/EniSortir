@@ -82,9 +82,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $location;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Trip::class, mappedBy="users")
+     */
+    private $registrations;
+
     public function __construct()
     {
         $this->trips = new ArrayCollection();
+        $this->registrations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,6 +293,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLocation(?Location $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Registration>
+     */
+    public function getRegistrations(): Collection
+    {
+        return $this->registrations;
+    }
+
+    public function addRegistration(Registration $registration): self
+    {
+        if (!$this->registrations->contains($registration)) {
+            $this->registrations[] = $registration;
+            $registration->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistration(Registration $registration): self
+    {
+        if ($this->registrations->removeElement($registration)) {
+            $registration->removeParticipant($this);
+        }
 
         return $this;
     }

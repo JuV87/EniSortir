@@ -34,6 +34,21 @@
     <br>
     <div>
         Liste des participants inscrits :
+
+        <table style="border: black 1px solid">
+            <tr style="border: black 1px solid" >
+                <th>Pseudo</th>
+                <th>Nom</th>
+
+            </tr>
+            {% for t in trips %}
+                <tr style="border: black 1px solid">
+                    <td>{{ t.registrations.pseudo }}</td>
+                    <td>{{t.registrations.name}}</td>
+
+                </tr>
+
+            {% endfor%}
     </div>
 
 

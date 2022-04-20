@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TripRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -76,6 +78,16 @@ class Trip
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="trips")
+     */
+    private $registrations;
+
+    public function __construct()
+    {
+        $this->registrations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -210,6 +222,33 @@ class Trip
     public function setPlace(?Place $place): self
     {
         $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Registration>
+     */
+    public function getRegistrations(): Collection
+    {
+        return $this->registrations;
+    }
+
+    public function addRegistration(Registration $registration): self
+    {
+        if (!$this->registrations->contains($registration)) {
+            $this->registrations[] = $registration;
+            $registration->addSorty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistration(Registration $registration): self
+    {
+        if ($this->registrations->removeElement($registration)) {
+            $registration->removeSorty($this);
+        }
 
         return $this;
     }
