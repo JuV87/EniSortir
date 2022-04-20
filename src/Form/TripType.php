@@ -63,7 +63,7 @@ class TripType extends AbstractType
     }
 
 
-private function addLieuField(FormInterface $form, ?City $city){
+    private function addLieuField(FormInterface $form, ?City $city){
     $builder = $form->add('place', EntityType::class,[
         'class' => Place::class,
         'label'=> 'Lieu :',
@@ -73,7 +73,7 @@ private function addLieuField(FormInterface $form, ?City $city){
         'auto_initialize' => false,
         'choices' => $city ? $city->getPlaces() : []
     ]);
-}
+    }
 
 
 

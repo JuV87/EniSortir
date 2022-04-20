@@ -31,6 +31,10 @@ class RegistrationFormType extends AbstractType
                 'class' => Location::class,
                 'choice_label' => 'name'
             ])
+            ->add('photo', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+            ])
         ;
     }
 
