@@ -31,7 +31,7 @@ class CityController extends AbstractController
             }
 
         $allCities = $cityRepository->findAll();
-        return $this->render("city/city.html.twig", [
+        return $this->render("city/city.html.twig", ['searchForm'=>$searchForm->createView(),
             'allCities'=>$allCities]);
 }
 
