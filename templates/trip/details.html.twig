@@ -21,9 +21,11 @@
     <br>
 <diV>
     {% if is_granted("ROLE_ADMIN") %}
-        <a href="{{ path('trip_modify', {'id':trip.id})}}"><button>Modifier la sortie</button></a>
+        <a href="{{ path('trip_modify', {id:trip.id})}}"><button>Modifier la sortie</button></a>
         <a href="{{ path('trip_delete', {id: trip.id })}}"><button>Supprimer la sortie</button></a>
+        {% if trip.etat.libelle == 'created' %}
         <a href="{{ path('trip_update', {id:trip.id}) }}"><button>Publier</button></a>
+        {% endif %}
         <a href="{{ path('home') }}"><button>Retour</button></a>
 
     {% endif %}

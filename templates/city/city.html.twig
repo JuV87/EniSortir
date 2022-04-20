@@ -31,12 +31,16 @@
                 </tr>
 
             {% endfor%}
-                <td>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                </td>
+            <tr id="formcity">
+                {{ form_start(searchForm) }}
+                <td> {{ form_widget(searchForm.name) }}</td>
+                <td>{{ form_widget(searchForm.codePostal) }}</td>
+                <td>  <button type="submit" id="addbutton">Ajouter</button></td>
+                {{ form_end(searchForm) }}
+            </tr>
         </table>
+        <br>
+       <button  id="addcitybutton">Ajouter une ville</button>
     </div>
 
     {% block javascript %}
@@ -63,7 +67,28 @@
                 }
               }
             }
+        $(document).ready(function(){
+         var $newCityButton = $('#addcitybutton');
+         var $trform = $('#formcity');
+         var $textInput = $('input:text');
 
+         $('#addcitybutton').show();
+         $('#addbutton').hide();
+         $('#formcity').hide();
+
+
+          $newCityButton.on('click', function(){
+              $newCityButton.hide();
+              $('#addbutton').show();
+              $('#formcity').show();
+          });
+          $newCityForm.on('submit', function (e){
+              e.preventDefault();
+                     $newCityButton.show();
+                     $('#formcity').hide();
+                     $textInput.val('');
+          });
+      });
     </script>
     {% endblock %}
 {% endblock %}
