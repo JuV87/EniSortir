@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\City;
+use App\Form\AddCityType;
 use App\Form\SearchCityType;
 use App\Repository\CityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,16 +19,16 @@ class CityController extends AbstractController
      */
     public function index(CityRepository $cityRepository, Request $request,EntityManagerInterface $entityManager){
 
-      $search = new City();
+      $city = new City();
 
-        $searchForm = $this->createForm(SearchCityType::class, $search);
-//        $searchForm->handleRequest($request);
-////            if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-////
-////            $allCities = $cityRepository->findBy();
-////            $this->render('city/city.html.twig', ['searchForm' => $searchForm->createView(),
-////                'allCities'=>$allCities]);
-////            }
+        $searchForm = $this->createForm(AddCityType::class, $city);
+        $searchForm->handleRequest($request);
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $entityManager->persist($city);
+            $entityManager->flush();
+            $this->addFlash('success', "Votre ville a bien été ajouté !");
+        return $this->redirectToRoute('app_city');
+            }
 
         $allCities = $cityRepository->findAll();
         return $this->render("city/city.html.twig", ['searchForm' => $searchForm->createView(),
