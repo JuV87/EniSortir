@@ -22,8 +22,8 @@
                     <td>{{ l.name }}</td>
 
                     <td>
-                        <a href="#">Modifier</a>
-                        <a href="#">Supprimer</a>
+                        <a href="{{path('location_modify', {id: l.id})} }">Modifier</a>
+                        <a href="{{ path('location_delete', {id: l.id}) }}">Supprimer</a>
                     </td>
                 </tr>
 

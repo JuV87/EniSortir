@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Modifier le site <strong>{{ location.name }}</strong></h1>
+<div>
+    {{ form_start(searchForm) }}
+    {{ form_widget(searchForm) }}
+    <br>
+    <button>Valider votre modification !</button>
+    <a href='{{ path('home') }}'><button>Retour</button></a>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
