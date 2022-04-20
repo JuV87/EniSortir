@@ -3,21 +3,6 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-{#
-    <h1>Inscription</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-    {{ form_widget(registrationForm) }}
-        <button type="submit" class="btn">Enregistrer</button>
-        <button type="reset" classe="btn">Annuler</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
-
-#}
 
    <h2>Modifier votre profil : </h2>
 
@@ -25,6 +10,8 @@
         {{ form_widget(registrationForm) }}
         <br>
         <button>Valider votre modification !</button>
+        <br>
+        <a href="{{ path('modify_password', { id: app.user.id }) }}" title="ChangePassword" alt="">Changer le mot de passe</a>
         {{ form_end(registrationForm) }}
 
 {% endblock %}

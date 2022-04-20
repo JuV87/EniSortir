@@ -103,4 +103,32 @@ class ProfileController extends AbstractController
         }
         return $this->render("registration/modifyprofile.html.twig", ['registrationForm' => $registrationForm->createView()]);
     }
+
+    //Modification du mot de passe
+    /**
+     * @Route("/changepassword", name="modify_password")
+     */
+    public function change_password( Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            throw $this->createNotFoundException('oops, pas dans la base de données!');
+        }
+        $changePasswordForm = $this->createForm( ChangePasswordFormType::class, $user);
+        $changePasswordForm->handleRequest($request);
+        if ($changePasswordForm->isSubmitted() && $changePasswordForm->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $changePasswordForm->get('plainPassword')->getData()
+                )
+            );
+            $entityManager->persist($user);
+            $entityManager->flush();
+            //               $this->addFlash('success', "Votre produit a bien été modifié");
+            //               return $this->redirectToRoute('main_home');
+        }
+        return $this->render("registration/changepassword.html.twig", ['changePasswordForm' => $changePasswordForm->createView()]);
+    }
 }
