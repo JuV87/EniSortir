@@ -59,11 +59,11 @@ class ProfileController extends AbstractController
 
 // Détails de l'utilisateur
     /**
-     * @Route("/details/{id}", name="details")
+     * @Route("/details", name="details")
      */
-    public function details($id, UserRepository $userRepository): Response
+    public function details( ): Response
     {
-        $user = $userRepository->find($id);
+        $user = $this->getUser();
         return $this->render('registration/detailsprofile.html.twig', [
             'user' => $user
         ]);
@@ -72,11 +72,11 @@ class ProfileController extends AbstractController
 
 //Modification de l'utilisateur
     /**
-     * @Route("/modify/{id}", name="modify_profile")
+     * @Route("/modify/", name="modify_profile")
      */
-    public function modify($id, Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager)
+    public function modify( Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager)
     {
-        $user = $userRepository->find($id);
+        $user = $this->getUser();
         if (!$user) {
             throw $this->createNotFoundException('oops, pas dans la base de données!');
         }
@@ -99,7 +99,7 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             //               $this->addFlash('success', "Votre produit a bien été modifié");
-            //               return $this->redirectToRoute('main_home');
+            return $this->redirectToRoute('details');
         }
         return $this->render("registration/modifyprofile.html.twig", ['registrationForm' => $registrationForm->createView()]);
     }
@@ -126,8 +126,8 @@ class ProfileController extends AbstractController
             );
             $entityManager->persist($user);
             $entityManager->flush();
-            //               $this->addFlash('success', "Votre produit a bien été modifié");
-            //               return $this->redirectToRoute('main_home');
+            //$this->addFlash('success', "Votre produit a bien été modifié");
+            return $this->redirectToRoute('details');
         }
         return $this->render("registration/changepassword.html.twig", ['changePasswordForm' => $changePasswordForm->createView()]);
     }
