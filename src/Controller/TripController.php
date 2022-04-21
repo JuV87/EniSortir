@@ -82,7 +82,7 @@ class TripController extends AbstractController
             $this->addFlash('success', "Votre sortie a bien été modifié !");
             return $this->redirectToRoute('home');
         }
-        return $this->render('trip/modify.html.twig', ['tripForm'=>$tripForm->createView(),
+        return $this->render('trip/modify2.html.twig', ['tripForm'=>$tripForm->createView(),
         'trip'=>$trip
         ]);
     }

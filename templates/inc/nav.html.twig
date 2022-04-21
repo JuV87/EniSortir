@@ -9,7 +9,7 @@
         {% if is_granted("ROLE_ADMIN") %}
         <li class="nav-item"><a href="{{ path('app_profile') }}" title="Inscription" >Inscription</a><li>
         <li class="nav-item"><a href="{{ path('app_city')}}" title="Cities" alt=""> Villes</a></li>
-        <li class="nav-item"><a href="{{ path('app_location')}}" title="Location" alt="">Sites</a></li>
+        <li class="nav-item"><a href="{{ path('app_location')}}" title="Campus" alt="">Campus</a></li>
         <li class="nav-item"><a href="{{ path('app_place')}}" title="Lieux" alt="">Lieux de Sortie</a></li>
 
         <li class="nav-item"><a href="{{ path('trip_createtrip', { id: app.user.id })}}" title="Trip" alt="">Créer une sortie</a></li>
