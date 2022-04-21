@@ -63,4 +63,16 @@ class TripRepository extends ServiceEntityRepository
         return $query;
     }
 
+    public function search($data, $data2)
+    {
+      return $this->createQueryBuilder('t')
+        ->andWhere('t.name LIKE :searchTerm')
+        ->setParameter('searchTerm','%'.$data.'%')
+        ->andWhere('t.location = :searchTerm2')
+        ->setParameter('searchTerm2',$data2)
+        ->getQuery()
+        ->execute();
+    }
+
+
 }

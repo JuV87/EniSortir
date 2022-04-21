@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Location;
+use App\Entity\Trip;
 use App\Form\AllTripSearchType;
 use App\Form\TripType;
 use App\Repository\TripRepository;
@@ -24,15 +25,18 @@ class MainConstrollerController extends AbstractController
     public function tripList(Request $request, EntityManagerInterface $entityManager, TripRepository $tripRepository): Response
     {
 
+
         $searchForm = $this->createForm(AllTripSearchType::class);
         $searchForm->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
 
-            $AllTrip = $tripRepository->findAll();
-        }
+            $data =  $searchForm->get('name')->getData();
+            $data2 =  $searchForm->get('site')->getData();
 
-        $AllTrip = $tripRepository->findAll();
+            $AllTrip=$tripRepository->search($data, $data2);
+
+        }
 
         return $this->render("home.html.twig", ['searchForm' => $searchForm->createView(),
             'AllTrip'=>$AllTrip]);

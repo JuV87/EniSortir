@@ -24,11 +24,12 @@ class AllTripSearchType extends AbstractType
                 'class'=>Location::class,
                 'choice_label'=>'name'))
             ->add('name', TextType::class, array('label'=>'Le nom de la sortie contient : ','required'=>false))
-            ->add('Organisateur', CheckboxType::class, array("label"=>"Sortie dont je suis l'oganisateur/trice",'required'=>false))
-            ->add('Inscrit', CheckboxType::class, array("label"=>"Sortie auxquelles je suis inscrit/e",'required'=>false))
-            ->add('PasInscrit', CheckboxType::class, array("label"=>"Sortie auxquelles je ne suis pas inscrit/e",'required'=>false))
-            ->add('PastTrip', CheckboxType::class, array("label"=>"Sorties passées",'required'=>false))
-            ->add('submit', SubmitType::class,array("label"=>'Rechercher'))
+//            ->add('Organisateur', CheckboxType::class, array("label"=>"Sortie dont je suis l'oganisateur/trice",'required'=>false))
+//            ->add('Inscrit', CheckboxType::class, array("label"=>"Sortie auxquelles je suis inscrit/e",'required'=>false))
+//            ->add('PasInscrit', CheckboxType::class, array("label"=>"Sortie auxquelles je ne suis pas inscrit/e",'required'=>false))
+//            ->add('PastTrip', CheckboxType::class, array("label"=>"Sorties passées",'required'=>false))
+//            ->add('submit', SubmitType::class,array("label"=>'Rechercher'))
+
 
         ;
     }
