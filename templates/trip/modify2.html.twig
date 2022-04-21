@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier la sortie "{{ trip.name }}"</h1>
+    <div>
+        {{ form_start(tripForm) }}
+        {{ form_widget(tripForm) }}
+        <br>
+        <button>Valider votre modification !</button>
+        {{ form_end(tripForm) }}
+    </div>
+    <br>
+{% endblock %}
+
+{% block title %}
+
+    {{ parent() }} | Modifier la sortie
+
+{% endblock %}
+
