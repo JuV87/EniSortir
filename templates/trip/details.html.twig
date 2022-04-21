@@ -41,14 +41,15 @@
                 <th>Nom</th>
 
             </tr>
-            {% for t in trips %}
+
+            {% for u in trip.users %}
                 <tr style="border: black 1px solid">
-                    <td>{{ t.registrations.pseudo }}</td>
-                    <td>{{t.registrations.name}}</td>
+                    <td>{{ u.pseudo }}</td>
+                    <td>{{u.nom}}</td>
 
                 </tr>
 
-            {% endfor%}
+            {% endfor %}
     </div>
 
 

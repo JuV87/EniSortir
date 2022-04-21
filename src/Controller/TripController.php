@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
+use App\Entity\User;
 use App\Form\TripType;
 use App\Repository\EtatRepository;
 use App\Repository\LocationRepository;
@@ -54,6 +55,7 @@ class TripController extends AbstractController
 
     public function details($id, TripRepository $tripRepository){
         $trip=$tripRepository->find($id);
+
         
         if (!$trip){
             throw $this->createNotFoundException("Cette sortie n'est pas créée, désolée!");
@@ -119,6 +121,22 @@ class TripController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
+    /**
+     * @Route("/adduser/{trip}/{user}", name="adduser")
+     */
+    public function addUserTrip(Trip $trip,User $user, Request $request, UserRepository $repository, EntityManagerInterface $entityManager, TripRepository $tripRepository){
+
+        if ($trip->getEtat() == 'open'){
+            $trip->addUser($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Votre participant a bien été ajouté à la sortie !");
+            return $this->redirectToRoute('home');
+        }
+
+    }
+
 
 
 

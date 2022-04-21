@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Entity\addRegistration;
 use Cassandra\Blob;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -71,10 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $photo;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Trip::class, mappedBy="organizer")
-     */
-    private $trips;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users")
@@ -85,12 +83,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Trip::class, mappedBy="users")
      */
-    private $registrations;
+    private $trips;
+
+
 
     public function __construct()
     {
         $this->trips = new ArrayCollection();
-        $this->registrations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,35 +254,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Trip>
-     */
-    public function getTrips(): Collection
-    {
-        return $this->trips;
-    }
 
-    public function addTrip(Trip $trip): self
-    {
-        if (!$this->trips->contains($trip)) {
-            $this->trips[] = $trip;
-            $trip->setOrganizer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrip(Trip $trip): self
-    {
-        if ($this->trips->removeElement($trip)) {
-            // set the owning side to null (unless already changed)
-            if ($trip->getOrganizer() === $this) {
-                $trip->setOrganizer(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getLocation(): ?Location
     {
@@ -298,29 +269,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Registration>
+     * @return Collection<int, Trip>
      */
-    public function getRegistrations(): Collection
+    public function getTrips(): Collection
     {
-        return $this->registrations;
+        return $this->trips;
     }
 
-    public function addRegistration(Registration $registration): self
+    public function addTrip(Trip $trip): self
     {
-        if (!$this->registrations->contains($registration)) {
-            $this->registrations[] = $registration;
-            $registration->addParticipant($this);
+        if (!$this->trips->contains($trip)) {
+            $this->trips[] = $trip;
+            $trip->addUser($this);
         }
 
         return $this;
     }
 
-    public function removeRegistration(Registration $registration): self
+    public function removeTrip(Trip $trip): self
     {
-        if ($this->registrations->removeElement($registration)) {
-            $registration->removeParticipant($this);
+        if ($this->trips->removeElement($trip)) {
+            $trip->removeUser($this);
         }
 
         return $this;
     }
+
 }
