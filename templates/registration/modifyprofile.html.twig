@@ -6,12 +6,12 @@
 
    <h2>Modifier votre profil : </h2>
 
-        {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
+        {{ form_start(recoveryForm) }}
+        {{ form_widget(recoveryForm) }}
         <br>
         <button class="btn btn-primary">Valider votre modification !</button>
         <br>
         <a href="{{ path('modify_password') }}" title="ChangePassword" alt="">Changer le mot de passe</a>
-        {{ form_end(registrationForm) }}
+        {{ form_end(recoveryForm) }}
 
 {% endblock %}
