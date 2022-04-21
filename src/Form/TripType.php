@@ -20,18 +20,19 @@ class TripType extends AbstractType
     {
         $builder
             ->add('name', null,['label'=>'Nom : ',])
-            ->add('datestart', null,['label'=>'Date et heure de la sortie : ',])
+            ->add('datestart', null,['label'=>'Date et heure de la sortie : ', 'widget' => 'single_text',])
             ->add('duration', null,['label'=>'Durée (en minutes) : ',])
-            ->add('dateend', null,['label'=>'Date limite d\'inscription : ',])
+            ->add('dateend', null,['label'=>'Date limite d\'inscription : ', 'widget' => 'single_text',])
             ->add('nbsubscriptionmax', null,['label'=>'Nombre de places : ',])
             ->add('descriptioninfos', null,['label'=>'Description et infos : ',])
             ->add('city', EntityType::class, ['class'=> 'App\Entity\City',
-                                                    'choice_label'=>'name',
+                                                     'choice_label'=>'name',
                                                      'label'=> 'Ville : ',
                                                      'mapped' => false,
-                                                    'placeholder' =>'Sélectionner une ville : '
+                                                     'placeholder' =>'Sélectionner une ville : '
             ])
-            ->add('reset', ResetType::class,array("label"=>'Annuler'))
+
+            ->add('reset', ResetType::class, array("label"=>'Annuler'))
         ;
 
         $builder->get('city')->addEventListener(
