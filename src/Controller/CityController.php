@@ -69,7 +69,7 @@ class CityController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', "Votre ville a bien été modifiée !");
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_city');
         }
         return $this->render('city/modify.html.twig', ['searchForm'=> $searchForm->createView(),
             'city'=> $city

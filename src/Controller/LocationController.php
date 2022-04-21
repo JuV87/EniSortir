@@ -71,7 +71,7 @@ class LocationController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', "Votre site a bien été modifié !");
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_location');
         }
         return $this->render('location/modify.html.twig', ['searchForm'=> $searchForm->createView(),
             'location'=> $location
