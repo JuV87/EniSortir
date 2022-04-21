@@ -30,12 +30,14 @@
              <th>Actions</th>
           </tr>
            {% for t in AllTrip %}
+
                {% set registered = false %}
                {% for user in t.users %}
                    {% if app.user.id == user.id %}
                     {% set registered = true %}
                    {% endif %}
                {% endfor %}
+
               <tr style="border: black 1px solid">
                  <td>{{ t.name }}</td>
                  <td>{{t.datestart |date("d/m/Y i:H")}}</td>

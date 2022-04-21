@@ -63,16 +63,42 @@ class TripRepository extends ServiceEntityRepository
         return $query;
     }
 
-    public function search($data, $data2)
-    {
-      return $this->createQueryBuilder('t')
-        ->andWhere('t.name LIKE :searchTerm')
-        ->setParameter('searchTerm','%'.$data.'%')
-        ->andWhere('t.location = :searchTerm2')
-        ->setParameter('searchTerm2',$data2)
-        ->getQuery()
-        ->execute();
+//    public function search($data, $data2)
+//    {
+//
+//
+//      return $this->createQueryBuilder('t')
+//        //Nom de la sortie
+//        ->andWhere('t.name LIKE ?1')
+//        ->setParameter(1,'%'.$data.'%')
+//          //Campus
+//        ->andWhere('t.location = ?2')
+//        ->setParameter(2,$data2)
+//
+//        ->getQuery()
+//        ->execute();
+//    }
+
+    public function search($value){
+        $query = $this ->createQueryBuilder('trip');
+
+        if(!empty($value['site'])){
+            $query = $query->andWhere('trip.location = ?1')
+                 ->setParameter(1,$value['site']);
+        }
+        if(!empty($value['name'])){
+            $query = $query->andWhere('trip.name LIKE ?2')
+                ->setParameter(2,'%'.$value['name'] .'%');
+        }
+
+        return $query -> getQuery()->getResult();
+
     }
+ //Piste pour les dates
+//->where("m.createdAt > ?1")
+//->andWhere("m.createdAt < ?2")
+//->setParameter(1, $beginDate)
+//->setParameter(2, $endDate)
 
 
 }
