@@ -32,7 +32,6 @@ class TripType extends AbstractType
                                                      'placeholder' =>'Sélectionner une ville : '
             ])
 
-            ->add('reset', ResetType::class, array("label"=>'Annuler'))
         ;
 
         $builder->get('city')->addEventListener(
