@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ChangePasswordFormType;
+use App\Form\RecoveryFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\AppAuthentificatorAuthenticator;
@@ -75,12 +76,12 @@ class ProfileController extends AbstractController
         if (!$user) {
             throw $this->createNotFoundException('oops, pas dans la base de données!');
         }
-        $registrationForm = $this->createForm(RegistrationFormType::class, $user);
-        $registrationForm->handleRequest($request);
+        $recoveryForm = $this->createForm(RecoveryFormType::class, $user);
+        $recoveryForm->handleRequest($request);
 
-        if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
+        if ($recoveryForm->isSubmitted() && $recoveryForm->isValid()) {
             /** @var UploadedFile $uploadedFile */
-            $uploadedFile = $registrationForm['photo']->getData();
+            $uploadedFile = $recoveryForm['photo']->getData();
             if ($uploadedFile) {
                 $destination = $this->getParameter('kernel.project_dir').'/public/uploads/article_image';
                 $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -93,10 +94,10 @@ class ProfileController extends AbstractController
             }
             $entityManager->persist($user);
             $entityManager->flush();
-            //               $this->addFlash('success', "Votre produit a bien été modifié");
+            $this->addFlash('success', "Votre mot de passe a bien été modifié");
             return $this->redirectToRoute('details');
         }
-        return $this->render("registration/modifyprofile.html.twig", ['registrationForm' => $registrationForm->createView()]);
+        return $this->render("registration/modifyprofile.html.twig", ['recoveryForm' => $recoveryForm->createView()]);
     }
 
     //Modification du mot de passe
@@ -121,7 +122,7 @@ class ProfileController extends AbstractController
             );
             $entityManager->persist($user);
             $entityManager->flush();
-            //$this->addFlash('success', "Votre produit a bien été modifié");
+            $this->addFlash('success', "Votre profil a bien été modifié");
             return $this->redirectToRoute('details');
         }
         return $this->render("registration/changepassword.html.twig", ['changePasswordForm' => $changePasswordForm->createView()]);
