@@ -19,7 +19,7 @@
 
 </div>
     <br>
-<diV>
+<div>
     {% if is_granted("ROLE_ADMIN") %}
         <a href="{{ path('trip_modify', {id:trip.id})}}"><button>Modifier la sortie</button></a>
         <a href="{{ path('trip_delete', {id: trip.id })}}"><button>Supprimer la sortie</button></a>
@@ -29,12 +29,13 @@
         <a href="{{ path('home') }}"><button>Retour</button></a>
 
     {% endif %}
-
-</diV>
+</div>
     <br>
+<div>
+       <strong>Liste des participants inscrits :</strong>
+</div>
     <div>
-        Liste des participants inscrits :
-
+<br>
         <table style="border: black 1px solid">
             <tr style="border: black 1px solid" >
                 <th>Pseudo</th>
@@ -46,11 +47,15 @@
                 <tr style="border: black 1px solid">
                     <td>{{ u.pseudo }}</td>
                     <td>{{u.nom}}</td>
+                    <td><a href="{{ path('details_user', {id: u.id}) }}">Voir Profil</a></td>
 
                 </tr>
 
             {% endfor %}
-    </div>
+        </table>
+</div>
+    <br>
+    <div><a href="{{ path('home') }}"><button>Retour</button></a></div>
 
 
 {% endblock %}

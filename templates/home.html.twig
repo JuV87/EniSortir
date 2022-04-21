@@ -31,6 +31,12 @@
              <th>Actions</th>
           </tr>
            {% for t in AllTrip %}
+               {% set registered = false %}
+               {% for user in t.users %}
+                   {% if app.user.id == user.id %}
+                    {% set registered = true %}
+                   {% endif %}
+               {% endfor %}
               <tr style="border: black 1px solid">
                  <td>{{ t.name }}</td>
                  <td>{{t.datestart |date("d/m/Y i:H")}}</td>
@@ -47,7 +53,9 @@
                     {% if is_granted("ROLE_ADMIN") and t.etat.id ==1 %}
                       <a href="{{ path('trip_update', {id:t.id}) }}">Publier</a>
                     {% endif %}
-                     {% if t.etat.id==2 %}
+                     {% if t.etat.id==2 and registered %}
+                         <a href="{{ path('trip_remove_user', {user:app.user.id, trip:t.id}) }}">Se désister</a>
+                         {% else %}
                      <a href="{{ path('trip_adduser', {user:app.user.id, trip:t.id}) }}">S'inscrire</a>
                      {% endif %}
                  </td>
@@ -55,7 +63,6 @@
 
            {% endfor%}
        </table>
-
     </div>
 
 {% endblock %}

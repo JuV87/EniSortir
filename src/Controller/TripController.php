@@ -125,24 +125,31 @@ class TripController extends AbstractController
     /**
      * @Route("/adduser/{trip}/{user}", name="adduser")
      */
-    public function addUserTrip(Trip $trip,User $user, Request $request, UserRepository $repository, EntityManagerInterface $entityManager, TripRepository $tripRepository){
+    public function addUserTrip(Trip $trip,User $user, Request $request, UserRepository $repository, EntityManagerInterface $entityManager, TripRepository $tripRepository)
+    {
+            $current_etat = $trip->getEtat()->getLibelle();
+            if ($current_etat == 'open') {
+                $trip->addUser($user);
+                $entityManager->flush();
 
-        if ($trip->getEtat()->getLibelle() == 'open'){
-            $trip->addUser($user);
-
-            $entityManager->flush();
-
-            $this->addFlash('success', "Votre participant a bien été ajouté à la sortie !");
-
-            return $this->redirectToRoute('home');
-        }
-        return $this->redirectToRoute('home');
-
+                $this->addFlash('success', "Votre participant a bien été ajouté à la sortie !");
+                return $this->redirectToRoute('home');
+            }
     }
 
+    /**
+     * @Route("/removeuser/{trip}/{user}", name="remove_user")
+     */
+    public function removeUserTrip(Trip $trip,User $user, Request $request, UserRepository $repository, EntityManagerInterface $entityManager, TripRepository $tripRepository)
+    {
+        $current_etat = $trip->getEtat()->getLibelle();
+        if ($current_etat == 'open') {
+            $trip->removeUser($user);
+            $entityManager->flush();
 
-
-
-
+            $this->addFlash('success', "Vous avez bien été désinscrit(e) de la sortie !");
+            return $this->redirectToRoute('home');
+        }
+    }
 
 }
