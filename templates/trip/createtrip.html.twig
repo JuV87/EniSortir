@@ -9,12 +9,13 @@
         {{ form_widget(tripForm) }}
 
         <div> Ville organisatrice : {{ app.user.location.name }}</div>
-        <button>Enregistrer</button>
+        <button class="btn btn-primary">Enregistrer</button>
+
 
         {{ form_end(tripForm) }}
-
-    <button>Publier la sortie</button>
-    <button>Annuler</button>
+    <br>
+    <button class="btn btn-warning">Publier la sortie</button>
+    <button class="btn btn-secondary">Annuler</button>
         </div>
 {% endblock %}
 

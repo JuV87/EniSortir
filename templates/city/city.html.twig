@@ -35,12 +35,12 @@
                 {{ form_start(searchForm) }}
                 <td> {{ form_widget(searchForm.name) }}</td>
                 <td>{{ form_widget(searchForm.codePostal) }}</td>
-                <td>  <button type="submit" id="addbutton">Ajouter</button></td>
+                <td>  <button class="btn btn-primary" type="submit" id="addbutton">Ajouter</button></td>
                 {{ form_end(searchForm) }}
             </tr>
         </table>
         <br>
-       <button  id="addcitybutton">Ajouter une ville</button>
+       <button  class="btn btn-primary" id="addcitybutton">Ajouter une ville</button>
     </div>
 
     {% block javascript %}
