@@ -53,7 +53,7 @@ class CityController extends AbstractController
     }
 
     /**
-     * @Route ("/modify/{id}", name="city_modify")
+     * @Route ("city/modify/{id}", name="city_modify")
      */
     public function modify($id, EntityManagerInterface $entityManager, CityRepository $cityRepository, Request $request){
         $city = $cityRepository->find($id);
