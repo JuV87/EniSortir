@@ -55,7 +55,7 @@ class LocationController extends AbstractController
     }
 
     /**
-     * @Route ("/modify/{id}", name="location_modify")
+     * @Route ("location/modify/{id}", name="location_modify")
      */
     public function modify($id, EntityManagerInterface $entityManager, LocationRepository $locationRepository, Request $request){
         $location = $locationRepository->find($id);
