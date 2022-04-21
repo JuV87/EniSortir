@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Profil de {{ user.pseudo }}</h1>
+    <img src="{{ asset('uploads/article_image/'~ user.photo ) }}" width="200" height="200">
+    <div>Prénom : {{ user.prenom }}</div>
+    <div>Nom : {{ user.nom}} </div>
+{%  endblock %}
+
+{% block title %}
+    {{ parent() }} | Détails de l'utilisateur
+
+{% endblock %}
