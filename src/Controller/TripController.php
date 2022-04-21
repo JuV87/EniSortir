@@ -127,13 +127,16 @@ class TripController extends AbstractController
      */
     public function addUserTrip(Trip $trip,User $user, Request $request, UserRepository $repository, EntityManagerInterface $entityManager, TripRepository $tripRepository){
 
-        if ($trip->getEtat() == 'open'){
+        if ($trip->getEtat()->getLibelle() == 'open'){
             $trip->addUser($user);
+
             $entityManager->flush();
 
             $this->addFlash('success', "Votre participant a bien été ajouté à la sortie !");
+
             return $this->redirectToRoute('home');
         }
+        return $this->redirectToRoute('home');
 
     }
 

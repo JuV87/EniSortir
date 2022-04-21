@@ -11,7 +11,10 @@
 
         {% set x =app.user.location.id %}
         {{ form_start(searchForm) }}
-            {{ form_widget(searchForm.site, {value: x|trans  } ) }}
+        {{ form(searchForm) }}
+{#            {{ form_widget(searchForm.site, {value: x|trans  } ) }}#}
+        <button class="btn btn-primary" type="submit">Recherche</button>
+{#        <a href="{{path('home') }}">Enregistrer</a>#}
         {{ form_end(searchForm) }}
     </div>
 
@@ -32,10 +35,11 @@
                  <td>{{ t.name }}</td>
                  <td>{{t.datestart |date("d/m/Y i:H")}}</td>
                  <td>{{ t.dateend | date("d/m/Y") }}</td>
-                 <td>0/ {{ t.nbsubscriptionmax }}</td>
+                 <td>{{ t.users.count }} / {{ t.nbsubscriptionmax }}</td>
                  <td>{{ t.etat.libelle }}</td>
                  <td> {{ t.organizer.nom }}</td>
-                 <td>
+
+                  <td>
                        <a href={{ path('trip_details', { id:t.id }) }}>Détails</a>
                     {%if(is_granted("ROLE_ADMIN"))  %}
                       <a href="{{ path('trip_modify', {id:t.id}) }}">Modifier</a>
