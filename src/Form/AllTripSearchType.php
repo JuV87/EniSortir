@@ -28,7 +28,7 @@ class AllTripSearchType extends AbstractType
 //            ->add('Inscrit', CheckboxType::class, array("label"=>"Sortie auxquelles je suis inscrit/e",'required'=>false))
 //            ->add('PasInscrit', CheckboxType::class, array("label"=>"Sortie auxquelles je ne suis pas inscrit/e",'required'=>false))
 //            ->add('PastTrip', CheckboxType::class, array("label"=>"Sorties passées",'required'=>false))
-//            ->add('submit', SubmitType::class,array("label"=>'Rechercher'))
+            ->add('submit', SubmitType::class,array("label"=>'Rechercher'))
 
 
         ;

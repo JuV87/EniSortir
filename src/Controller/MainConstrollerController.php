@@ -37,7 +37,7 @@ class MainConstrollerController extends AbstractController
             $AllTrip=$tripRepository->search($data, $data2);
 
         }
-
+            $AllTrip=$tripRepository->findAll();
         return $this->render("home.html.twig", ['searchForm' => $searchForm->createView(),
             'AllTrip'=>$AllTrip]);
     }
