@@ -21,7 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ProfileController extends AbstractController
 {
 
-//Inscription d'un utilisateur
+//Creation d'un utilisateur
     /**
      * @Route("/profile", name="app_profile")
      */
@@ -45,6 +45,7 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $this->addFlash('success', "Un utilisateur a été créé");
 
         }
 

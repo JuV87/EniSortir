@@ -58,7 +58,13 @@ class AppAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
+    // Rajout pour pouvoir avoir un message d'erreur si email et mot de passe érronés
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
+    {
+        $request->getSession()->getFlashBag()->add('notice', "Votre email ou votre mot de passe est incorrecte");
 
+        return new RedirectResponse($this->urlGenerator->generate('app_connection'));
+    }
 
 
 
