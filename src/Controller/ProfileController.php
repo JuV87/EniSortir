@@ -94,7 +94,7 @@ class ProfileController extends AbstractController
             }
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->addFlash('success', "Votre mot de passe a bien été modifié");
+            $this->addFlash('success', "Votre profil a bien été modifié");
             return $this->redirectToRoute('details');
         }
         return $this->render("registration/modifyprofile.html.twig", ['recoveryForm' => $recoveryForm->createView()]);
@@ -122,7 +122,7 @@ class ProfileController extends AbstractController
             );
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->addFlash('success', "Votre profil a bien été modifié");
+            $this->addFlash('success', "Votre mot de passe a bien été modifié");
             return $this->redirectToRoute('details');
         }
         return $this->render("registration/changepassword.html.twig", ['changePasswordForm' => $changePasswordForm->createView()]);

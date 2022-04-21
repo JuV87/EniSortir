@@ -62,7 +62,6 @@ class TripType extends AbstractType
         );
     }
 
-
     private function addLieuField(FormInterface $form, ?City $city){
     $builder = $form->add('place', EntityType::class,[
         'class' => Place::class,
