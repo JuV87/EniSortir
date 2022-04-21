@@ -20,7 +20,7 @@ class TripType extends AbstractType
     {
         $builder
             ->add('name', null,['label'=>'Nom : ',])
-            ->add('datestart', null,['label'=>'Date et heure de la sortie : '])
+            ->add('datestart', null,['label'=>'Date et heure de la sortie : ', 'widget' => 'single_text',])
             ->add('duration', null,['label'=>'Durée (en minutes) : ',])
             ->add('dateend', null,['label'=>'Date limite d\'inscription : ', 'widget' => 'single_text',])
             ->add('nbsubscriptionmax', null,['label'=>'Nombre de places : ',])
