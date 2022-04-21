@@ -43,6 +43,9 @@
                     {% if is_granted("ROLE_ADMIN") and t.etat.id ==1 %}
                       <a href="{{ path('trip_update', {id:t.id}) }}">Publier</a>
                     {% endif %}
+                     {% if t.etat.id==2 %}
+                     <a href="{{ path('trip_adduser', {user:app.user.id, trip:t.id}) }}">S'inscrire</a>
+                     {% endif %}
                  </td>
               </tr>
 

@@ -82,11 +82,13 @@ class Trip
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="trips")
      */
-    private $registrations;
+    private $users;
+
+
 
     public function __construct()
     {
-        $this->registrations = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -227,29 +229,28 @@ class Trip
     }
 
     /**
-     * @return Collection<int, Registration>
+     * @return Collection<int, User>
      */
-    public function getRegistrations(): Collection
+    public function getUsers(): Collection
     {
-        return $this->registrations;
+        return $this->users;
     }
 
-    public function addRegistration(Registration $registration): self
+    public function addUser(User $user): self
     {
-        if (!$this->registrations->contains($registration)) {
-            $this->registrations[] = $registration;
-            $registration->addSorty($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
         }
 
         return $this;
     }
 
-    public function removeRegistration(Registration $registration): self
+    public function removeUser(User $user): self
     {
-        if ($this->registrations->removeElement($registration)) {
-            $registration->removeSorty($this);
-        }
+        $this->users->removeElement($user);
 
         return $this;
     }
+
+
 }
