@@ -66,6 +66,17 @@ class ProfileController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/details{id}", name="details_user")
+     */
+    public function details_id($id, UserRepository $repository): Response
+    {
+        $user = $repository->find($id);
+        return $this->render('detailsprofile/user.html.twig', [
+            'user' => $user
+        ]);
+    }
+
 
 //Modification de l'utilisateur
     /**

@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Register</h1>
-
+    <div class="col-4">
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
 
@@ -15,7 +15,7 @@
         <button type="submit" class="btn-lg btn-primary">Enregistrer</button>
         <button type="reset" class="btn-lg btn-warning">Annuler</button>
     {{ form_end(registrationForm) }}
-
+    </div>
 
 
 {% endblock %}
