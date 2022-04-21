@@ -1,18 +1,50 @@
 
-<nav class="navbar navbar-expand-sm ">
-    <ul  class="navbar navbar-expand-xl">
-        {% if is_granted("ROLE_USER") %}  <!--A garder sinon erreur pour mot de passe oublié  -->
-        <li class="nav-item"><a href="{{ path('home') }}" title="Homepage" alt="">Accueil</a></li>
-        <li class="nav-item"><a href="{{ path('details')}}" title="My Account" alt="">Mon profil</a></li>
-        <li class="nav-item"><a href= "{{ path('app_logout') }}" title=Logout>Se déconnecter</a></li>
-        {% endif %}
-        {% if is_granted("ROLE_ADMIN") %}
-        <li class="nav-item"><a href="{{ path('app_profile') }}" title="Inscription" >Inscription</a><li>
-        <li class="nav-item"><a href="{{ path('app_city')}}" title="Cities" alt=""> Villes</a></li>
-        <li class="nav-item"><a href="{{ path('app_location')}}" title="Campus" alt="">Campus</a></li>
-        <li class="nav-item"><a href="{{ path('app_place')}}" title="Lieux" alt="">Lieux de Sortie</a></li>
+<ul class="nav justify-content-center">
+    {% if is_granted("ROLE_USER") %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('details')}}">Mon profil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+    </li>
+    {% endif %}
+    {% if is_granted("ROLE_ADMIN") %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_profile') }}">Ajouter utilisateur</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_city')}}">Villes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_location')}}">Campus</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_place')}}" >Lieux</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('trip_createtrip', { id: app.user.id })}}" >Créer une sortie</a>
+    </li>
+    {% endif %}
+</ul>
 
-        <li class="nav-item"><a href="{{ path('trip_createtrip', { id: app.user.id })}}" title="Trip" alt="">Créer une sortie</a></li>
-        {% endif %}
-    </ul>
-</nav>
+
+{#<nav class="navbar navbar-expand-sm ">#}
+{#    <ul  class="navbar navbar-expand-xl">#}
+{#        {% if is_granted("ROLE_USER") %}  <!--A garder sinon erreur pour mot de passe oublié  -->#}
+{#        <li class="nav-item"><a href=title="Homepage" alt="">Accueil</a></li>#}
+{#        <li class="nav-item"><a href="{{ path('details')}}" title="My Account" alt="">Mon profil</a></li>#}
+{#        <li class="nav-item"><a href= "{{ path('app_logout') }}" title=Logout>Se déconnecter</a></li>#}
+{#        {% endif %}#}
+{#        {% if is_granted("ROLE_ADMIN") %}#}
+{#        <li class="nav-item"><a href="{{ path('app_profile') }}" title="Inscription" >Inscription</a><li>#}
+{#        <li class="nav-item"><a href="{{ path('app_city')}}" title="Cities" alt=""> Villes</a></li>#}
+{#        <li class="nav-item"><a href="{{ path('app_location')}}" title="Campus" alt="">Campus</a></li>#}
+{#        <li class="nav-item"><a href="{{ path('app_place')}}" title="Lieux" alt="">Lieux de Sortie</a></li>#}
+
+{#        <li class="nav-item"><a href="{{ path('trip_createtrip', { id: app.user.id })}}" title="Trip" alt="">Créer une sortie</a></li>#}
+{#        {% endif %}#}
+{#    </ul>#}
+{#</nav>#}
