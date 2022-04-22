@@ -18,12 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @Route ("/user", name="user_")
+ */
+
 class ProfileController extends AbstractController
 {
 
 //Creation d'un utilisateur
     /**
-     * @Route("/profile", name="app_profile")
+     * @Route("/profile", name="profile")
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserAuthenticatorInterface $userAuthenticator, AppAuthentificatorAuthenticator $authenticator): Response
     {
@@ -107,7 +111,7 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash('success', "Votre profil a bien été modifié");
-            return $this->redirectToRoute('details');
+            return $this->redirectToRoute('user_details');
         }
         return $this->render("registration/modifyprofile.html.twig", ['recoveryForm' => $recoveryForm->createView()]);
     }
@@ -135,7 +139,7 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash('success', "Votre mot de passe a bien été modifié");
-            return $this->redirectToRoute('details');
+            return $this->redirectToRoute('user_details');
         }
         return $this->render("registration/changepassword.html.twig", ['changePasswordForm' => $changePasswordForm->createView()]);
     }
