@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Detail{% endblock %}
+
 
 {% block body %}
-
-    <h1>Details du profil</h1>
+    <br><br>
+    <h1>Détails du profil</h1>
     <h3>{{ user.pseudo }}</h3>
     <img src="{{ asset('uploads/article_image/'~ user.photo ) }}" width="200" height="200" >
     <article>
@@ -18,4 +18,8 @@
     <br>
     <a  class="btn btn-primary" href="{{ path ('user_modify_profile') }}"> Modifier </a>
 
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Détail profil
 {% endblock %}
