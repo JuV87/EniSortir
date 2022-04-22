@@ -37,7 +37,7 @@ $(document).on('change', '#trip_city', function () {
 function chargerListeLieux() {
     $.ajax({
         method: "POST",
-        url: "/sortir/public/ajax/rechercheLieuByVille ", /* appel de la fonction rechercheLieuByVille du controlleur AjaxController*/
+        url: "/EniSortir/public/ajax/rechercheLieuByVille ", /* appel de la fonction rechercheLieuByVille du controlleur AjaxController*/
         data: {
             'city_id': $('#trip_city').val() //recupération de la ville dans la data
         }

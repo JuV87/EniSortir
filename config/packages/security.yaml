@@ -48,7 +48,10 @@ security:
          - { path: ^/city, roles: ROLE_ADMIN }
          - { path: ^/location, roles: ROLE_ADMIN }
          - { path: ^/place, roles: ROLE_ADMIN }
-         - { path: ^/trip, roles: ROLE_ADMIN }
+         - { path: ^/delete, roles: ROLE_ADMIN }
+         - { path: ^/trip/modify, roles: ROLE_ADMIN }
+         - { path: ^/trip/update, roles: ROLE_ADMIN }
+         - { path: ^/trip/adduser, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
