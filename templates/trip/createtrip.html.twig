@@ -13,13 +13,11 @@
         <div> Ville organisatrice : {{ app.user.location.name }}</div>
         <br>
         <button class="btn btn-primary">Enregistrer</button>
-        <a href="{{ path('home') }}"><button type ="reset" class="btn btn-secondary">Annuler</button></a>
+        <a href="{{ path('home') }}"><button type ="reset" class="btn btn-danger">Annuler</button></a>
         <br>
 
         {{ form_end(tripForm) }}
     <br>
-
-
         </div>
 {% endblock %}
 
@@ -37,7 +35,7 @@ $(document).on('change', '#trip_city', function () {
 function chargerListeLieux() {
     $.ajax({
         method: "POST",
-        url: "/EniSortir/public/ajax/rechercheLieuByVille ", /* appel de la fonction rechercheLieuByVille du controlleur AjaxController*/
+        url: "/sortir/public/ajax/rechercheLieuByVille ", /* appel de la fonction rechercheLieuByVille du controlleur AjaxController*/
         data: {
             'city_id': $('#trip_city').val() //recupération de la ville dans la data
         }
@@ -57,9 +55,7 @@ function chargerListeLieux() {
 })
 
 function chargerInformationLieu(){
-
 }
-
 }
 
 </script>

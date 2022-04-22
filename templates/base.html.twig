@@ -11,11 +11,12 @@
                 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                 crossorigin="anonymous"></script>    </head>
     <body>
+
     <header>
         <div class="container">
         {#<h1 align="center">Sortir.com</h1>#}
 
-            <center><img class=img-responsive src="uploads/images/logo.png" align="center"  style=width:30% style=height:30% ></center>
+       <center><img src="{{ asset('logo.png') }}" class="img-responsive" align="center" style=width:30% style=height:30% ></center>
         <br>
         <h6>Bonjour <strong>{{app.user.pseudo}}  </strong><img src="{{ asset('uploads/article_image/'~ app.user.photo ) }}"width="30" height="30"></h6>
         {% include ('inc/nav.html.twig') %}
