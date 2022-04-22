@@ -41,7 +41,7 @@ class TripController extends AbstractController
             $entityManager->persist($trip);
             $entityManager->flush();
 
-            $this->addFlash('success', "Votre sortie a bien été crée!");
+            $this->addFlash('success', "Votre sortie a bien été créée!");
             return $this->redirectToRoute('home');
         }
         return $this->render("trip/createtrip.html.twig", ['tripForm'=>$tripForm->createView(),
@@ -79,7 +79,7 @@ class TripController extends AbstractController
             $entityManager->persist($trip);
             $entityManager->flush();
 
-            $this->addFlash('success', "Votre sortie a bien été modifié !");
+            $this->addFlash('success', "Votre sortie a bien été modifiée !");
             return $this->redirectToRoute('home');
         }
         return $this->render('trip/modify2.html.twig', ['tripForm'=>$tripForm->createView(),
