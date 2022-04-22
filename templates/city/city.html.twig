@@ -3,7 +3,10 @@
 {% block title %}Gérer les villes{% endblock %}
 
 {% block body %}
-    <h1>Gérer les villes</h1>
+    <br><br>
+<div class="container col-sm-10 col-xl-8 justify-content-center">
+    <div class="container text-center">
+<h1>Gérer les villes</h1>
 
      <div>
          <h2>Filtrez les villes</h2>
@@ -13,7 +16,8 @@
      </div>
     <div>
         <h1>Liste des villes</h1>
-        <table id="name_trip" style="border: black 1px solid">
+    </div>
+        <table id="name_trip" class="table table-info table-striped table-bordered">
             <tr style="border: black 1px solid" >
                 <th>Ville</th>
                 <th>Code Postal</th>
@@ -42,7 +46,7 @@
         <br>
        <button  class="btn btn-primary" id="addcitybutton">Ajouter une ville</button>
     </div>
-
+</div>
     {% block javascript %}
     {{ parent() }}
     <script>

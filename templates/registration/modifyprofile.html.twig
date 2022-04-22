@@ -3,7 +3,8 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-
+     <br><br>
+<div class="container col-sm-10 col-xl-6 justify-content-center" >
    <h2>Modifier votre profil : </h2>
 
         {{ form_start(recoveryForm) }}
@@ -14,5 +15,5 @@
         <br>
         <a href="{{ path('modify_password') }}" title="ChangePassword" alt="">Changer le mot de passe</a>
         {{ form_end(recoveryForm) }}
-
+</div>
 {% endblock %}

@@ -6,6 +6,11 @@
 
 
 {% block body %}
+    <br>
+    <div id="date" style="float:right">
+        Date du jour : {{ 'now'|date('d/m/Y') }}
+        <br>
+    </div>
     <div>
         <h2>Filtrez vos recherches</h2>
 
@@ -17,9 +22,9 @@
         {{ form_end(searchForm) }}
     </div>
 
-    <div>
+    <div class="container">
        <h1>Tableau des sorties</h1>
-       <table class="table table-info table-striped" style="border: black 1px solid">
+       <table class="table table-info table-striped table-bordered" style="border: black 1px solid">
           <tr style="border: black 1px solid">
              <th>Nom de la sortie</th>
              <th>Date de la sortie</th>
@@ -57,7 +62,9 @@
                      {% if t.etat.id==2 and registered %}
                          <a href="{{ path('trip_remove_user', {user:app.user.id, trip:t.id}) }}">Se désister</a>
                          {% else %}
+                             {% if t.etat.id==2 %}
                      <a href="{{ path('trip_adduser', {user:app.user.id, trip:t.id}) }}">S'inscrire</a>
+                             {% endif %}
                      {% endif %}
                  </td>
               </tr>
@@ -65,6 +72,7 @@
            {% endfor%}
        </table>
     </div>
+
 
 {% endblock %}
 

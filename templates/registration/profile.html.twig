@@ -3,8 +3,10 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Inscription utilisateur</h1>
-    <div class="col-4">
+    <br>
+<div class="container col-sm-10 col-xl-6 justify-content-center" >
+<h1>Inscription utilisateur</h1>
+    <div class="col-9">
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
 
@@ -16,6 +18,7 @@
         <button type="reset" class="btn btn-secondary">Annuler</button>
     {{ form_end(registrationForm) }}
     </div>
+</div>
 
 
 {% endblock %}

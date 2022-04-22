@@ -18,7 +18,7 @@ class AllTripSearchType extends AbstractType
         $builder
             ->add('site', EntityType::class, array(
                 'label'=>'Site : ',
-                'placeholder'=>'Selectionnez un site',
+                'placeholder'=>'Sélectionnez un site',
                 'required'=>false,
                 'mapped'=>false,
                 'class'=>Location::class,

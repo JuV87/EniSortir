@@ -3,16 +3,21 @@
 {% block title %}Gérer les sites{% endblock %}
 
 {% block body %}
-    <h1>Gérer les Campus</h1>
+    <br><br>
+<div class="container col-sm-10 col-xl-10 justify-content-center">
 
-    <div>
+
+    <div class="container text-center">
+        <h1>Gérer les Campus</h1>
+        <div >
         <h2>Filtrez les campus</h2>
         <input type="text" id="input" onkeyup="search()" placeholder="Recherchez un campus">
 
     </div>
     <div>
         <h1>Liste des Campus</h1>
-        <table id="name_location" style="border: black 1px solid">
+    </div>
+        <table id="name_location" class="table table-info table-striped table-bordered">
             <tr style="border: black 1px solid">
                 <th>Campus</th>
                 <th>Actions</th>
@@ -35,7 +40,10 @@
                 {{ form_end(searchForm) }}
             </tr>
         </table>
+
     </div>
+</div>
+
     {% block javascript %}
     {{ parent() }}
     <script>
