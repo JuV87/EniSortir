@@ -24,10 +24,11 @@ class MainConstrollerController extends AbstractController
      */
     public function tripList(Request $request, EntityManagerInterface $entityManager, TripRepository $tripRepository): Response
     {
-
         $searchForm = $this->createForm(AllTripSearchType::class);
         $searchForm->handleRequest($request);
+
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            
             $AllTrip=$tripRepository->search($request->request->get('all_trip_search'));
         }else{
             $AllTrip=$tripRepository->findAll();
@@ -36,9 +37,6 @@ class MainConstrollerController extends AbstractController
         return $this->render("home.html.twig", ['searchForm' => $searchForm->createView(),
             'AllTrip'=>$AllTrip]);
     }
-
-
-
 }
 
 
